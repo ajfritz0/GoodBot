@@ -29,7 +29,7 @@ module.exports = {
 		.setDescription('4chan module')
 		.addStringOption(option =>
 			option.setName('board')
-				.setDescription('The board to poll')
+				.setDescription('The board to pull from')
 				.setRequired(true),
 		),
 	async execute(interaction) {
