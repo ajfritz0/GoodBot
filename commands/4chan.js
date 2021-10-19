@@ -2,24 +2,56 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 
 const getRandomIndex = (struct) => {
+	if (!struct) {
+		return null;
+	}
 	return struct[Math.floor(Math.random() * struct.length)];
 };
+// Lol yeah this works for this case alright
+const sanitizeHTML = (str) => {
+	return str.replace(/(<([^>]+)>)/gi, '');
+};
 
-const getRandomThreadText = async (board) => {
+const decodeEntities = (str) => {
+	const lookup = {
+		'lt': '<',
+		'gt': '>',
+		'nbsp': ' ',
+		'amp': '&',
+		'quot': '"',
+	};
+	return str
+		.replace(/&(gt|lt|nbsp|amp|quot);/g, (_m, e) => lookup[e])
+		.replace(/&#(\d+);/gi, (_m, num) => String.fromCharCode(parseInt(num)));
+};
+
+const getPostURL = (board, no) => {
+	return `https://boards.4chan.org/${board}/thread/${no}`;
+};
+
+const getRandomThread = async (board) => {
 	return new Promise((resolve, reject) => {
 		if (!board || typeof board !== 'string') {
-			reject(new Error('Bad board :('));
+			reject(new Error('Invalid board'));
 		}
 
 		axios.get(`https://a.4cdn.org/${board}/catalog.json`)
 			.then((response) => {
 				const { data } = response;
 				const page = getRandomIndex(data);
-				const thread = getRandomIndex(page.threads);
-				resolve(thread.com);
+				const thread = getRandomIndex(page?.threads);
+				if (!thread) {
+					reject(new Error('Could not parse thread info.'));
+				}
+				else {
+					resolve({
+						link: getPostURL(board, thread.no),
+						text: sanitizeHTML(decodeEntities(thread.com)),
+					});
+				}
 			})
 			.catch((error) => {
-				reject(new Error('Could not complete request'));
+				reject(new Error(`Could not complete request: ${error}`));
 			});
 	});
 };
@@ -34,7 +66,7 @@ module.exports = {
 		),
 	async execute(interaction) {
 		const board = interaction.options.getString('board');
-		const data = await getRandomThreadText(board);
-		return await interaction.reply((typeof data == 'string') ? data : 'Error: input must be of time string');
+		const { link, text } = await getRandomThread(board);
+		return await interaction.reply(`${text}\n - ${link}`);
 	},
 };
