@@ -39,7 +39,9 @@ const getRandomThread = async (board) => {
 			.then((response) => {
 				const { data } = response;
 				const page = getRandomIndex(data);
-				const thread = getRandomIndex(page?.threads);
+				const thread = getRandomIndex(
+					page?.threads?.filter((thread) => thread.com && !thread.sticky)
+				);
 				if (!thread) {
 					reject(new Error('Could not parse thread info.'));
 				}
