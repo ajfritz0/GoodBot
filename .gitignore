@@ -1,7 +1,3 @@
 cfg/
-**/Examples
 node_modules/
-.eslintrc.json
-bot.json
 tests
-./markov.js.ignore
