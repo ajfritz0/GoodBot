@@ -30,11 +30,11 @@ module.exports = {
 		.setName('hackernews')
 		.setDescription('Top Hackers News Posts')
 		.addStringOption(option =>
-			option.setName('numPosts')
+			option.setName('numposts')
 				.setDescription('The number of posts to return'),
 		),
 	async execute(interaction) {
-		const numPosts = interaction.options.getString('numPosts');
+		const numPosts = interaction.options.getString('numposts');
 		const response = await getTopPosts(numPosts);
 		return await interaction.reply(response);
 	},
