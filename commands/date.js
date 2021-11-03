@@ -9,7 +9,7 @@ module.exports = {
 				.setDescription('Reference timezone')),
 	async execute(interaction) {
 		const today = new Date();
-		const tz = interaction.options.getString('timezone');
+		const tz = interaction.options.getString('timezone') || 'MST';
 
 		try {
 			const date = today.toLocaleString('en-US', { timeZone: tz });
