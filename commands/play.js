@@ -44,24 +44,20 @@ module.exports = function(client) {
 			mp.joinVC(channelId, interaction.guild.id, interaction.guild.voiceAdapterCreator);
 
 			try {
-				console.log('Entering try block');
 				mp.play(url);
 
-				console.log('Building embed');
 				const title = await mp.getTitle(url);
 				const embed = new MessageEmbed({
 					title: 'Now Playing:',
 					description: title,
 					url,
 				});
-				console.log('Editing reply');
 
 				await interaction.reply({ content: 'Playing', embeds: [embed] });
 				mp._interaction = interaction;
-				console.log('End try block');
 			}
 			catch (e) {
-				console.log('Enter catch block');
+				console.error(e);
 				return await interaction.reply({
 					content: e,
 					ephemeral: true,
