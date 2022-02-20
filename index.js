@@ -5,11 +5,17 @@ const fs = require('fs');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.commands = new Collection();
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`)(client);
+	// placeholder
+	console.log(event);
+}
 for (const file of commandFiles) {
-	let command = require(`./commands/${file}`);
-	if (typeof command === 'function') command = command(client);
+	console.log(`Loading Module ${file}`);
+	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
 

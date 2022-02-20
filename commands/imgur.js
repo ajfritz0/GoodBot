@@ -14,7 +14,9 @@ module.exports = {
 		.setDescription('Post an image from Imgur')
 		.addStringOption(option =>
 			option.setName('query')
-				.setDescription('Image search query.')),
+				.setDescription('Image search query.')
+				.setRequired(true),
+		),
 	async execute(interaction) {
 		const q = interaction.options.getString('query');
 
@@ -25,7 +27,7 @@ module.exports = {
 		});
 
 		const len = data['data']['data'].length;
-		const link = data['data']['data'][randRange(0, len)].link;
-		await interaction.reply(link);
+		const link = data['data']['data'][randRange(0, len)]?.link;
+		await interaction.reply((link === null) ? 'Nothing found' : link);
 	},
 };

@@ -43,75 +43,65 @@ function listTimers() {
 }
 
 
-module.exports = function(client) {
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('timer')
+		.setDescription('Sends a messages at a specific time and date')
+		.addSubcommand(subcommand =>
+			subcommand.setName('list')
+				.setDescription('Returns a list of active timers'))
+		.addSubcommand(subcommand =>
+			subcommand.setName('add')
+				.setDescription('Add a new timer')
+				.addStringOption(option =>
+					option.setName('msg')
+						.setDescription('Message')
+						.setRequired(true))
+				.addIntegerOption(option =>
+					option.setName('mins')
+						.setDescription('Minutes'))
+				.addIntegerOption(option =>
+					option.setName('hours')
+						.setDescription('Hours'))
+				.addIntegerOption(option =>
+					option.setName('day')
+						.setDescription('Day'))
+				.addIntegerOption(option =>
+					option.setName('month')
+						.setDescription('Month')))
+		.addSubcommand(subcommand =>
+			subcommand.setName('rem')
+				.setDescription('Remove an active timer')
+				.addStringOption(option =>
+					option.setName('id')
+						.setDescription('The timer id'))),
+	async execute(interaction) {
+		const op = interaction.options._hoistedOptions.reduce((acc, val) => {
+			acc[val.name] = val.value;
+			return acc;
+		}, {});
+		const channel = interaction.channel;
+		const now = new Date();
+		const subcomm = interaction.options.getSubcommand();
 
-	if (client !== null) {
-		client.once('ready', () => {
-			console.log('Timer Module Ready');
-			return;
-		});
-	}
-	return {
-		data: new SlashCommandBuilder()
-			.setName('timer')
-			.setDescription('Sends a messages at a specific time and date')
-			.addSubcommand(subcommand =>
-				subcommand.setName('list')
-					.setDescription('Returns a list of active timers'))
-			.addSubcommand(subcommand =>
-				subcommand.setName('add')
-					.setDescription('Add a new timer')
-					.addStringOption(option =>
-						option.setName('msg')
-							.setDescription('Message')
-							.setRequired(true))
-					.addIntegerOption(option =>
-						option.setName('mins')
-							.setDescription('Minutes'))
-					.addIntegerOption(option =>
-						option.setName('hours')
-							.setDescription('Hours'))
-					.addIntegerOption(option =>
-						option.setName('day')
-							.setDescription('Day'))
-					.addIntegerOption(option =>
-						option.setName('month')
-							.setDescription('Month')))
-			.addSubcommand(subcommand =>
-				subcommand.setName('rem')
-					.setDescription('Remove an active timer')
-					.addStringOption(option =>
-						option.setName('id')
-							.setDescription('The timer id'))),
-		async execute(interaction) {
-			const op = interaction.options._hoistedOptions.reduce((acc, val) => {
-				acc[val.name] = val.value;
-				return acc;
-			}, {});
-			const channel = interaction.channel;
-			const channelId = interaction.channelId;
-			const now = new Date();
-			const subcomm = interaction.options.getSubcommand();
-
-			if (subcomm === 'list') {
-				return await interaction.reply(listTimers());
-			}
-			else if (subcomm === 'add') {
-				const year = now.getFullYear();
-				const month = op['month'] - 1 || now.getMonth();
-				const day = op['day'] || now.getDate();
-				const hours = op['hours'] || now.getHours();
-				const mins = op['mins'] || now.getMinutes();
-				const date = new Date(year, month, day, hours, mins);
-				const msg = op['msg'];
-				const test = createTimer(date, msg, channel.send.bind(channel, msg));
-				if (!test) return interaction.reply({ content: 'Unable to add timer', ephemeral: true });
-				return await interaction.reply({ content: 'Your timer has been added', ephemeral: true });
-			}
-			else if (subcomm === 'rem') {
-				if (removeTimer(op['id'])) return await interaction.reply('Timer removed');
-				else return await interaction.reply({ content: 'There is no timer associated with that id', ephemeral: true });
-			}
-		},
-	};
+		if (subcomm === 'list') {
+			return await interaction.reply(listTimers());
+		}
+		else if (subcomm === 'add') {
+			const year = now.getFullYear();
+			const month = op['month'] - 1 || now.getMonth();
+			const day = op['day'] || now.getDate();
+			const hours = op['hours'] || now.getHours();
+			const mins = op['mins'] || now.getMinutes();
+			const date = new Date(year, month, day, hours, mins);
+			const msg = op['msg'];
+			const test = createTimer(date, msg, channel.send.bind(channel, msg));
+			if (!test) return interaction.reply({ content: 'Unable to add timer', ephemeral: true });
+			return await interaction.reply({ content: 'Your timer has been added', ephemeral: true });
+		}
+		else if (subcomm === 'rem') {
+			if (removeTimer(op['id'])) return await interaction.reply('Timer removed');
+			else return await interaction.reply({ content: 'There is no timer associated with that id', ephemeral: true });
+		}
+	},
 };
