@@ -11,7 +11,6 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`)(client);
 	// placeholder
-	console.log(event);
 }
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
