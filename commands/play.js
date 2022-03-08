@@ -24,7 +24,7 @@ module.exports = {
 		mp.joinVC(channelId, interaction.guild.id, interaction.guild.voiceAdapterCreator);
 
 		try {
-			mp.play(url);
+			await mp.play(url);
 
 			const title = await mp.getTitle(url);
 			const embed = new MessageEmbed({
