@@ -9,8 +9,7 @@ const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`)(client);
-	// placeholder
+	require(`./events/${file}`)(client);
 }
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
