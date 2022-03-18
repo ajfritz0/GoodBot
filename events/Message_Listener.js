@@ -14,10 +14,15 @@ const badFortunes = [
 ];
 module.exports = (client) => {
 	client.on('messageCreate', message => {
+		return;
 		if (message.author.bot) return;
+		const botID = message.client.user.id;
+		const mentions = message.mentions.users;
 
-		message.channel.send((Math.floor(Math.random() * 2) == 0)
-			? goodFortunes[Math.floor(Math.random() * goodFortunes.length)]
-			: badFortunes[Math.floor(Math.random() * badFortunes.length)]);
+		if (mentions.has(botID)) {
+			message.channel.send((Math.floor(Math.random() * 2) == 0)
+				? goodFortunes[Math.floor(Math.random() * goodFortunes.length)]
+				: badFortunes[Math.floor(Math.random() * badFortunes.length)]);
+		}
 	});
 };
