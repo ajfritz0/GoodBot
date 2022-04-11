@@ -18,7 +18,7 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
-		interaction.deferReply();
+		await interaction.deferReply();
 		const q = interaction.options.getString('query');
 
 		const data = await axios.get('/3/gallery/search', {

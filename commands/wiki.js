@@ -11,7 +11,7 @@ module.exports = {
 				.setDescription('Search term')
 				.setRequired(true)),
 	async execute(interaction) {
-		interaction.deferReply();
+		await interaction.deferReply();
 		const q = interaction.options.getString('query');
 		const linkData = (await axios(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${q}&limit=1`))['data'];
 		const summaryData = (await axios(`https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts&titles=${q}&exintro&explaintext&exsentences=3`))['data'];
