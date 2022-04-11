@@ -15,15 +15,7 @@ for (const file of eventFiles) {
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
 	const command = require(`./commands/${file}`);
-	client.commands.set(command.data.name, async (action) => {
-		const start = (new Date()).getTime();
-		console.log(`User Interaction: ${action.commandName} / User: ${action.user.username}`);
-		console.log(`Channel Name: ${action.channel.name} / Guild Name: ${action.guild.name}`);
-		console.log(`Created At: ${action.createAt.toString()}`);
-		await command.execute(action);
-		const delta = (new Date()).getTime() - start;
-		console.log(`Execution finished in ${delta}ms`);
-	});
+	client.commands.set(command.data.name, command);
 }
 
 
@@ -39,13 +31,19 @@ client.on('interactionCreate', async interaction => {
 
 	if (!command) return;
 
+	const start = (new Date()).getTime();
 	try {
+		console.log(`User Interaction: ${interaction.commandName} / User: ${interaction.user.username}`);
+		console.log(`Channel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}`);
+		console.log(`Create At: ${interaction.createdAt.toString()}`);
 		await command.execute(interaction);
 	}
 	catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
+	const delta = (new Date()).getTime() - start;
+	console.log(`Execution finished in ${delta}ms`);
 });
 
 client.login(token);
