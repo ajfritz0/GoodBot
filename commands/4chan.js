@@ -67,8 +67,9 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
+		interaction.deferReply();
 		const board = interaction.options.getString('board');
 		const { link, text } = await getRandomThread(board);
-		return await interaction.reply(`${text}\n - ${link}`);
+		return await interaction.editReply(`${text}\n - ${link}`);
 	},
 };

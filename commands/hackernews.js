@@ -34,8 +34,9 @@ module.exports = {
 				.setDescription('The number of posts to return'),
 		),
 	async execute(interaction) {
+		interaction.deferReply();
 		const numPosts = interaction.options.getString('numposts') || 3;
 		const response = await getTopPosts(numPosts);
-		return await interaction.reply(response);
+		return await interaction.editReply(response);
 	},
 }

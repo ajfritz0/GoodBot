@@ -18,6 +18,7 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
+		interaction.deferReply();
 		const q = interaction.options.getString('query');
 
 		const data = await axios.get('/3/gallery/search', {
@@ -28,6 +29,6 @@ module.exports = {
 
 		const len = data['data']['data'].length;
 		const link = data['data']['data'][randRange(0, len)]?.link;
-		await interaction.reply((link === null) ? 'Nothing found' : link);
+		await interaction.editReply((link === null) ? 'Nothing found' : link);
 	},
 };
