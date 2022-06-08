@@ -9,8 +9,11 @@ const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
+	const eventName = file.slice(0, -3);
 	console.log(`Loading event module: ${file}`);
-	require(`./events/${file}`)(client);
+	const cb = require(`./events/${file}`);
+
+	client.on(eventName, cb);
 }
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
@@ -18,6 +21,8 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+const MusicPlayer = require('./lib/MusicPlayer');
+client.mp = new MusicPlayer();
 
 client.once('ready', () => {
 	console.log('Ready!');
