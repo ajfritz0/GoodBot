@@ -1,13 +1,17 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('queue')
 		.setDescription('Queue a track to play'),
 	async execute(interaction) {
-		return interaction.reply({
-			content: interaction.client.mp.playlist.showUpcoming(),
-			ephemeral: true,
+		const content = interaction.client.mp.showUpcoming();
+		const embed = new MessageEmbed()
+			.setTitle('Queue songs')
+			.setDescription(content);
+		interaction.reply({
+			embeds: [embed],
 		});
 	},
 };

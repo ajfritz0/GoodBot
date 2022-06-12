@@ -1,26 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-
-const start_music = (interaction, index = null) => {
-	const videoDetails = interaction.client.mp.playTrack(index);
-	console.log(videoDetails);
-	const seconds = parseInt(videoDetails.duration);
-	const time = Math.floor(seconds / 60).toString() + (seconds % 60).toString();
-
-	const embed = new MessageEmbed()
-		.setAuthor({
-			name: videoDetails.author_name,
-			url: videoDetails.author_url,
-		})
-		.setTitle(videoDetails.title)
-		.setURL(videoDetails.video_url)
-		.setThumbnail(videoDetails.thumbnail)
-		.setTimestamp()
-		.addField('Duration', ' ' + time, true);
-	interaction.channel.send({
-		embeds: [embed],
-	});
-};
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -28,10 +6,7 @@ module.exports = {
 		.setDescription('Play youtube audio')
 		.addStringOption(option =>
 			option.setName('url')
-				.setDescription('Link to youtube video'))
-		.addIntegerOption(option =>
-			option.setName('track_num')
-				.setDescription('Track number to play')),
+				.setDescription('Link to youtube video')),
 	async execute(interaction) {
 		const voice = interaction.guild.voiceStates.cache;
 		const author = interaction.member;
@@ -53,38 +28,60 @@ module.exports = {
 				const index = await mp.add(url);
 				if (index == -1) {
 					return interaction.editReply({
-						content: 'Not a valid youtube URL',
 						ephemeral: true,
+						content: 'Not a valid youtube URL',
 					});
 				}
 				else {
-					console.log(`INDEX: ${index}`);
-					console.log(mp.playlist.playlist);
-					start_music(interaction, index);
+					const video = mp.playTrack(index);
+					if (video == null) {
+						return interaction.editReply({
+							ephemeral: true,
+							content: 'Video does not exist',
+						});
+					}
+					const embed = mp.createEmbed(video);
+					interaction.channel.send({
+						embeds: [embed],
+					}).then((msg) => {
+						setTimeout(() => msg.delete(), 60 * 1000);
+					});
 				}
 			}
 			else if (!mp.isStopped) {
 				const test = await mp.add(url);
 				if (test == -1) {
 					return interaction.editReply({
-						content: 'Not a valid youtube LINK',
 						ephemeral: true,
+						content: 'Not a valid youtube LINK',
 					});
 				}
 				else {
 					return interaction.editReply({
-						content: `${test} track(s) added`,
 						ephemeral: true,
+						content: 'Tracks added',
 					});
 				}
 			}
 		}
 		else {
-			start_music(interaction);
+			const video = mp.playTrack();
+			if (video == null) {
+				return interaction.editReply({
+					ephemeral: true,
+					content: 'Video does not exist',
+				});
+			}
+			const embed = mp.createEmbed(video);
+			interaction.channel.send({
+				embeds: [embed],
+			}).then((msg) => {
+				setTimeout(() => msg.delete(), 60 * 1000);
+			});
 		}
 		return interaction.editReply({
-			content: 'Playing music',
 			ephemeral: true,
+			content: 'Playing music',
 		});
 	},
 };

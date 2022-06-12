@@ -1,24 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-
-const start_music = (interaction, videoDetails) => {
-	const seconds = parseInt(videoDetails.duration);
-	const timeString = Math.floor(seconds / 60).toString() + (seconds % 60).toString();
-
-	const embed = new MessageEmbed()
-		.setTitle(videoDetails.title)
-		.setAuthor({
-			name: videoDetails.author_name,
-			url: videoDetails.author_url,
-		})
-		.setURL(videoDetails.video_url)
-		.setThumbnail(videoDetails.thumbnail)
-		.setTimestamp()
-		.addField('Duration', timeString, true);
-	interaction.channel.send({
-		embeds: [embed],
-	});
-};
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -52,7 +32,13 @@ module.exports = {
 			}
 		}
 		if (video == null) console.log('Something is majorly wrong');
-		start_music(interaction, video);
+		const embed = mp.createEmbed(video);
+
+		interaction.channel.send({
+			embeds: [embed],
+		}).then(msg => {
+			setTimeout(() => msg.delete(), 60 * 1000);
+		});
 		return interaction.reply({
 			content: 'Playing music',
 			ephemeral: true,
