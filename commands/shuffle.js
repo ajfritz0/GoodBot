@@ -5,6 +5,9 @@ module.exports = {
 		.setName('shuffle')
 		.setDescription('Shuffles the playlist queue'),
 	async execute(interaction) {
-		return interaction.reply('Work in progress');
+		interaction.client.mp.shuffle();
+		return interaction.reply('Music Shuffled').then((reply => {
+			setTimeout(() => reply.delete(), 10 * 1000);
+		}));
 	},
 };
