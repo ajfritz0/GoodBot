@@ -21,7 +21,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-const MusicPlayer = require('./lib/MusicPlayer');
+const MusicPlayer = require('./src/MusicPlayer');
 client.mp = new MusicPlayer();
 
 client.once('ready', () => {

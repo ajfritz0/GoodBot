@@ -130,7 +130,9 @@ class MusicPlayer {
 	}
 
 	joinVC(chId, gId, adap) {
-		if (this.connection !== null) return;
+		console.log('Attempting to connect to voice channel\n-----');
+		if (this.connection !== null) return console.log('Voice connection already exists\n-----');
+		console.log('Voice connection does NOT exists\n-----');
 		this.voiceChannelIdleTimer = setTimeout(() => this.destroy(), 5 * 60 * 1000);
 		this.connection = joinVoiceChannel({
 			channelId: chId,
@@ -140,7 +142,7 @@ class MusicPlayer {
 
 		this.connection.on('stateChange', (oldState, newState) => {
 			if (newState.status == 'destroyed') {
-				this.stop();
+				this.destroy();
 			}
 		});
 		this.connection.subscribe(this.player);
@@ -201,7 +203,7 @@ class MusicPlayer {
 	}
 
 	shuffle() {
-		const arr = this.playlist.slice(0);
+		const arr = this.playlist.playlist.slice(0);
 		for (let i = 0; i < arr.length; i++) {
 			const r = Math.floor(Math.random() * arr.length);
 			const x = arr[r];

@@ -8,7 +8,7 @@ module.exports = {
 	async execute(interaction) {
 		const content = interaction.client.mp.showUpcoming();
 		const embed = new MessageEmbed()
-			.setTitle('Queue songs')
+			.setTitle('Queued songs:')
 			.setDescription(content);
 		interaction.reply({
 			embeds: [embed],
