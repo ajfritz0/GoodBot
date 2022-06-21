@@ -191,7 +191,9 @@ class MusicPlayer {
 		const str = truncatedTrackList.reduce((prev, curr, idx) => {
 			const title = (curr.title.length < 30) ? curr.title : curr.title.slice(0, 27) + '...';
 			const durr = toTimeString(parseInt(curr.duration));
-			return prev + `${index + idx}. ${title}\t${durr}\n`;
+			let line = `${index + idx}. ${title}\t${durr}\n`;
+			if (idx == 0) line = `**${str}**`;
+			return prev + line;
 		}, '');
 
 		if (this.playlist.playlist.length > index + 5) {
