@@ -29,6 +29,6 @@ module.exports = {
 
 		const len = data['data']['data'].length;
 		const link = data['data']['data'][randRange(0, len)]?.link;
-		await interaction.editReply((link === null) ? 'Nothing found' : link);
+		await interaction.editReply((link === null || link === undefined || link.length == 0) ? 'Nothing found' : link);
 	},
 };
