@@ -192,7 +192,7 @@ class MusicPlayer {
 			const title = (curr.title.length < 30) ? curr.title : curr.title.slice(0, 27) + '...';
 			const durr = toTimeString(parseInt(curr.duration));
 			let line = `${index + idx}. ${title}\t${durr}\n`;
-			if (idx == 0) line = `**${str}**`;
+			if (idx == 0) line = `**${line}**`;
 			return prev + line;
 		}, '');
 
