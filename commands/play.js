@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -20,28 +19,69 @@ module.exports = {
 			return;
 		}
 		const channelId = voiceState.channelId;
-
 		mp.joinVC(channelId, interaction.guild.id, interaction.guild.voiceAdapterCreator);
 
-		try {
-			mp.play(url);
-
-			const title = await mp.getTitle(url);
-			const embed = new MessageEmbed({
-				title: 'Now Playing:',
-				description: title,
-				url,
-			});
-
-			await interaction.reply({ content: 'Playing', embeds: [embed] });
-			mp._interaction = interaction;
+		await interaction.deferReply();
+		if (url !== null && url !== undefined) {
+			// if the playlist is empty, queue and play
+			if (mp.isEmpty() || mp.isStopped) {
+				const index = await mp.add(url);
+				if (index == -1) {
+					return interaction.editReply({
+						ephemeral: true,
+						content: 'Not a valid youtube URL',
+					});
+				}
+				else {
+					const video = mp.playTrack(index);
+					if (video == null) {
+						return interaction.editReply({
+							ephemeral: true,
+							content: 'Video does not exist',
+						});
+					}
+					const embed = mp.createEmbed(video);
+					interaction.channel.send({
+						embeds: [embed],
+					}).then((msg) => {
+						setTimeout(() => msg.delete(), 60 * 1000);
+					});
+				}
+			}
+			else if (!mp.isStopped) {
+				const test = await mp.add(url);
+				if (test == -1) {
+					return interaction.editReply({
+						ephemeral: true,
+						content: 'Not a valid youtube LINK',
+					});
+				}
+				else {
+					return interaction.editReply({
+						ephemeral: true,
+						content: 'Tracks added',
+					});
+				}
+			}
 		}
-		catch (e) {
-			console.error(e);
-			return await interaction.reply({
-				content: e,
-				ephemeral: true,
+		else {
+			const video = mp.playTrack();
+			if (video == null) {
+				return interaction.editReply({
+					ephemeral: true,
+					content: 'Video does not exist',
+				});
+			}
+			const embed = mp.createEmbed(video);
+			interaction.channel.send({
+				embeds: [embed],
+			}).then((msg) => {
+				setTimeout(() => msg.delete(), 60 * 1000);
 			});
 		}
+		return interaction.editReply({
+			ephemeral: true,
+			content: 'Playing music',
+		});
 	},
 };
