@@ -20,11 +20,13 @@ module.exports = {
 			'"/timer": Sends a timed message to the channel\n' +
 			'"/wiki": Pulls a wikipedia article based on a query\n' +
 			'Music Player Commands:\n' +
-			'\t"/play": Play a youtube link via a voice channel\n' +
-			'\t"/pause": Pause music music\n' +
-			'\t"/next": Play the next song\n' +
+			'\t"/play": Play or queue a youtube link\n' +
+			'\t"/pause": Pause music\n' +
+			'\t"/skip": Skip to new track\n' +
 			'\t"/stop": Stop the music\n' +
-			'\t"/queue": Add a link to the queue\n';
+			'\t"/clear": Clear the playlist\n' +
+			'\t"/queue": View music queue\n' +
+			'\t"/shuffle": Shuffle playlist\n';
 		const embed = new MessageEmbed()
 			.setDescription('```bash\n' + str + '```');
 		interaction.reply({
