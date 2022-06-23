@@ -6,7 +6,10 @@ module.exports = {
 		.setName('queue')
 		.setDescription('Queue a track to play'),
 	async execute(interaction) {
-		const content = interaction.client.mp.showUpcoming();
+		const mpCollection = interaction.client.MusicPlayerCollection;
+		const mp = mpCollection.get(interaction.guild.id);
+		if (mp === null || mp === undefined) return interaction.reply('You have not added any music');
+		const content = mp.showUpcoming();
 		const embed = new MessageEmbed()
 			.setTitle('Queued songs:')
 			.setDescription(content);

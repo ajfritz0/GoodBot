@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const MusicPlayer = require('../src/MusicPlayer');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,18 +13,24 @@ module.exports = {
 		const author = interaction.member;
 		const voiceState = voice.get(author.id);
 		const url = interaction.options.getString('url');
-		const mp = interaction.client.mp;
+		const mpCollection = interaction.client.MusicPlayerCollection;
+		const guildId = interaction.guild.id;
 
+		if (!mpCollection.has(guildId)) mpCollection.set(guildId, new MusicPlayer());
+		const mp = mpCollection.get(guildId);
+
+		// check if the user is in a voice channel
 		if (voiceState === undefined || voiceState.channelId === null) {
 			await interaction.reply('You must be in a voice channel to use this command');
 			return;
 		}
 		const channelId = voiceState.channelId;
-		mp.joinVC(channelId, interaction.guild.id, interaction.guild.voiceAdapterCreator);
+		mp.joinVC(channelId, guildId, interaction.guild.voiceAdapterCreator);
 
 		await interaction.deferReply();
+		mp.textChannel = interaction.channel;
 		if (url !== null && url !== undefined) {
-			// if the playlist is empty, queue and play
+			// if the playlist is empty or the music is stopped, queue and play
 			if (mp.isEmpty() || mp.isStopped) {
 				const index = await mp.add(url);
 				if (index == -1) {
@@ -33,24 +40,19 @@ module.exports = {
 					});
 				}
 				else {
-					const video = mp.playTrack(index);
-					if (video == null) {
+					const doesExist = mp.playTrack(index);
+					if (!doesExist) {
 						return interaction.editReply({
 							ephemeral: true,
 							content: 'Video does not exist',
 						});
 					}
-					const embed = mp.createEmbed(video);
-					interaction.channel.send({
-						embeds: [embed],
-					}).then((msg) => {
-						setTimeout(() => msg.delete(), 60 * 1000);
-					});
 				}
 			}
+			// if music is currently playing, just add to the queue
 			else if (!mp.isStopped) {
-				const test = await mp.add(url);
-				if (test == -1) {
+				const index = await mp.add(url);
+				if (index == -1) {
 					return interaction.editReply({
 						ephemeral: true,
 						content: 'Not a valid youtube LINK',
@@ -59,25 +61,28 @@ module.exports = {
 				else {
 					return interaction.editReply({
 						ephemeral: true,
-						content: 'Tracks added',
+						content: 'Track(s) added',
 					});
 				}
 			}
 		}
+		// if no url was provided, simply play whatever track in the queue is selected
 		else {
-			const video = mp.playTrack();
-			if (video == null) {
+			if (mp.isPaused()) {
+				mp.togglePause();
+				return interaction.editReply({
+					content: 'Unpaused',
+				}).then(msg => {
+					setTimeout(() => msg.delete(), 5 * 1000);
+				});
+			}
+			const doesExist = mp.playTrack();
+			if (doesExist == null) {
 				return interaction.editReply({
 					ephemeral: true,
 					content: 'Video does not exist',
 				});
 			}
-			const embed = mp.createEmbed(video);
-			interaction.channel.send({
-				embeds: [embed],
-			}).then((msg) => {
-				setTimeout(() => msg.delete(), 60 * 1000);
-			});
 		}
 		return interaction.editReply({
 			ephemeral: true,

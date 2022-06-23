@@ -6,6 +6,7 @@ class PlaylistManager {
 
 	addItem(item) {
 		this.playlist.push(item);
+		console.log(this.playlist.length);
 	}
 
 	addItems(items = []) {
@@ -28,8 +29,7 @@ class PlaylistManager {
 	}
 
 	selectNext() {
-		if (this.playlist.length == 0 || this.readHead > this.playlist.length - 1) {
-			this.reset();
+		if (this.playlist.length == 0 || this.readHead >= this.playlist.length - 1) {
 			return null;
 		}
 		this.readHead += 1;
