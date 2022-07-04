@@ -28,19 +28,27 @@ module.exports = {
 				const strMod = expressions[i].replace(diceRegex, '');
 				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
 
-				for (let j = 0; j < quantity; j++) arr.push(randNum(range) + modifier);
-
-				const max = range + modifier;
-				const min = 1 + modifier;
-				reply.push(`\`\`\`bash\n${expressions[i]}: ` + arr.reduce((prev, curr) => {
+				for (let j = 0; j < quantity - 1; j++) {
+					arr.push(randNum(range));
+				}
+				const max = range;
+				const min = 1;
+				const length = arr.length;
+				reply.push(`\`\`\`bash\n${expressions[i]}: (` + arr.reduce((prev, curr, idx) => {
+					let str = prev;
 					if (curr == max) {
-						return prev + `'${curr}' `;
+						str += `'${curr}'`;
 					}
 					else if (curr == min) {
-						return prev + `$${curr} `;
+						str += `$${curr}`;
 					}
-					return prev + `${curr} `;
-				}, '') + '```\n');
+					else {
+						str += `${curr}`;
+					}
+
+					if (idx == length - 1) return str;
+					else return str + ' + ';
+				}, '') + `) + ${modifier} = ${arr.reduce((x, y) => x + y, 0) + modifier}\`\`\`\n`);
 			}
 			catch (err) {
 				console.log('FOUND AN ERROR', err);
