@@ -28,7 +28,7 @@ module.exports = {
 				const strMod = expressions[i].replace(diceRegex, '');
 				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
 
-				for (let j = 0; j < quantity - 1; j++) {
+				for (let j = 0; j < quantity; j++) {
 					arr.push(randNum(range));
 				}
 				const max = range;
