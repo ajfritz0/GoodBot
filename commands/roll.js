@@ -1,9 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const mexp = require('math-expression-evaluator');
 
 function randNum(max) {
 	return Math.floor(Math.random() * max) + 1;
 }
-const diceRegex = /\d+d\d+(\+\d+)?/ig;
+const diceRegex = /\d+d\d+/ig;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
@@ -13,26 +14,43 @@ module.exports = {
 				.setDescription('Default: 1d6'),
 		),
 	async execute(interaction) {
-		const diceStr = interaction.options.getString('dice') || '';
-		const dice = diceStr.match(diceRegex) || ['1d6'];
+		const diceStr = interaction.options.getString('dice') || '1d6';
+		const expressions = diceStr.split(' ');
 		const reply = [];
-		for (let i = 0; i < dice.length; i++) {
+		for (let i = 0; i < expressions.length; i++) {
 			const arr = [];
-			const _s = dice[i].split('d');
-			const _t = _s[1].split('+');
-			const die = [parseInt(_s[0]), parseInt(_t[0]), (!_t[1]) ? 0 : parseInt(_t[1])];
-			const numOfRolls = die[0];
-			const dieSize = die[1];
-			const modifier = die[2];
+			const die = expressions[i].match(diceRegex)[0];
+			if (die == null) continue;
+			try {
+				const _str = die.split('d');
+				const quantity = parseInt(_str[0]);
+				const range = parseInt(_str[1]);
+				const strMod = expressions[i].replace(diceRegex, '');
+				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
 
-			for (let j = 0; j < numOfRolls; j++) arr.push(randNum(dieSize) + modifier);
-			const max = dieSize + modifier;
-			const min = 1 + modifier;
-			reply.push(`\`\`\`bash\n${dice[i]}: ` + arr.reduce((prev, curr) => {
-				return (prev + ((curr == max) ? `'${curr}'` : (curr == min) ? `$${curr}` : `${curr}`)) + ' ';
-			}, '') + '```\n');
+				for (let j = 0; j < quantity; j++) arr.push(randNum(range) + modifier);
+
+				const max = range + modifier;
+				const min = 1 + modifier;
+				reply.push(`\`\`\`bash\n${expressions[i]}: ` + arr.reduce((prev, curr) => {
+					if (curr == max) {
+						return prev + `'${curr}' `;
+					}
+					else if (curr == min) {
+						return prev + `$${curr} `;
+					}
+					return prev + `${curr} `;
+				}, '') + '```\n');
+			}
+			catch (err) {
+				console.log('FOUND AN ERROR', err);
+				return interaction.reply({
+					content: err.message,
+					ephemeral: true,
+				});
+			}
 		}
 
-		return await interaction.reply(reply.join('\n').trim());
+		return interaction.reply(reply.join('').trim());
 	},
 };
