@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 function randNum(max) {
 	return Math.floor(Math.random() * max) + 1;
 }
-const diceRegex = /\d+d\d+/i;
+const diceRegex = /\d+d\d+(\+\d+)?/ig;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
@@ -13,22 +13,26 @@ module.exports = {
 				.setDescription('Default: 1d6'),
 		),
 	async execute(interaction) {
-		const diceStr = interaction.options.getString('dice') || '1d6';
-		const dice = diceStr
-			.split(' ')
-			.map(val => val.match(diceRegex)[0])
-			.filter(val => val !== null);
-		console.log(dice);
-		let reply = '';
+		const diceStr = interaction.options.getString('dice') || '';
+		const dice = diceStr.match(diceRegex) || ['1d6'];
+		const reply = [];
 		for (let i = 0; i < dice.length; i++) {
-			const die = dice[i].split('d');
-			const numOfRolls = parseInt(die[0]) % 101;
-			const dieSize = parseInt(die[1]) % 101;
-			for (let j = 0; j < numOfRolls; j++) reply += `${randNum(dieSize)} `;
-			reply += '\n';
-		}
-		console.log(reply);
+			const arr = [];
+			const _s = dice[i].split('d');
+			const _t = _s[1].split('+');
+			const die = [parseInt(_s[0]), parseInt(_t[0]), (!_t[1]) ? 0 : parseInt(_t[1])];
+			const numOfRolls = die[0];
+			const dieSize = die[1];
+			const modifier = die[2];
 
-		return await interaction.reply(reply.trim());
+			for (let j = 0; j < numOfRolls; j++) arr.push(randNum(dieSize) + modifier);
+			const max = dieSize + modifier;
+			const min = 1 + modifier;
+			reply.push(`\`\`\`bash\n${dice[i]}: ` + arr.reduce((prev, curr) => {
+				return (prev + ((curr == max) ? `'${curr}'` : (curr == min) ? `$${curr}` : `${curr}`)) + ' ';
+			}, '') + '```\n');
+		}
+
+		return await interaction.reply(reply.join('\n').trim());
 	},
 };
