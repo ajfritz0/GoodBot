@@ -18,7 +18,6 @@ module.exports = {
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {
-			const arr = [];
 			const die = expressions[i].match(diceRegex)[0];
 			if (die == null) continue;
 			try {
@@ -27,28 +26,18 @@ module.exports = {
 				const range = parseInt(_str[1]);
 				const strMod = expressions[i].replace(diceRegex, '');
 				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
-
+				reply.push(`\`\`\`bash\n${expressions[i]}: (`);
+				let sum = 0;
 				for (let j = 0; j < quantity; j++) {
-					arr.push(randNum(range));
+					const num = randNum(range);
+					if (num == range) reply.push(`'${num}'🎉`);
+					else if (num == 1) reply.push(`$${num}💀`);
+					else reply.push(num.toString());
+					if (j != quantity - 1) reply.push('+');
+					sum += num;
 				}
-				const max = range;
-				const min = 1;
-				const length = arr.length;
-				reply.push(`\`\`\`bash\n${expressions[i]}: (` + arr.reduce((prev, curr, idx) => {
-					let str = prev;
-					if (curr == max) {
-						str += `'${curr}'`;
-					}
-					else if (curr == min) {
-						str += `$${curr}`;
-					}
-					else {
-						str += `${curr}`;
-					}
-
-					if (idx == length - 1) return str;
-					else return str + ' + ';
-				}, '') + `) + ${modifier} = ${arr.reduce((x, y) => x + y, 0) + modifier}\`\`\`\n`);
+				if (modifier === 0) reply.push(`) = ${sum}\`\`\`\n`);
+				else reply.push(`) + ${modifier} = ${sum + modifier}\`\`\`\n`);
 			}
 			catch (err) {
 				console.log('FOUND AN ERROR', err);
@@ -59,6 +48,6 @@ module.exports = {
 			}
 		}
 
-		return interaction.reply(reply.join('').trim());
+		return interaction.reply(reply.join(' ').trim());
 	},
 };
