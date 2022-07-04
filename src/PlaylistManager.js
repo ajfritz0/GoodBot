@@ -49,18 +49,6 @@ class PlaylistManager {
 		this.readHead = index;
 		return this.playlist[this.readHead];
 	}
-
-	// todo
-	removeTrack(index) {
-		return index;
-	}
-
-	// todo
-	showUpcoming() {
-		return this.playlist.reduce((prev, curr, idx) => {
-			return prev + `${idx}. ${curr.title}\n`;
-		}, '') ;
-	}
 }
 
 module.exports = PlaylistManager;

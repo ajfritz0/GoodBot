@@ -108,7 +108,6 @@ class MusicPlayer {
 		this.lastSentMessage = await this.textChannel.send({
 			embeds: [embed],
 		});
-		console.log(this.lastSentMessage);
 		this.isStopped = false;
 		this.player.play(this.createStream(video.video_url));
 	}
@@ -235,7 +234,6 @@ class MusicPlayer {
 			const durr = toTimeString(parseInt(curr.duration));
 			const diff = 50 - (title.length + durr.length);
 			const padding = (new Array(diff)).fill(' ').join('');
-			console.log(`Padding size: ${padding}`);
 			let line = `${index + idx}. ${title}${padding}${durr}\n`;
 			if (idx == 0) line = `**${line}**`;
 			return prev + line;
