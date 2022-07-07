@@ -18,7 +18,7 @@ const toTimeString = (seconds) => {
 	const h = date.getHours();
 	const m = date.getMinutes();
 	const s = date.getSeconds();
-	return `${((h < 0) ? '' : (h < 10) ? '0' + h : h) + ':'}${(m < 10) ? '0' + m : m}:${(s < 10) ? '0' + s : s}`;
+	return `${((h == 0) ? '' : (((h < 10) ? '0' + h : h) + ':'))}${(m < 10) ? '0' + m : m}:${(s < 10) ? '0' + s : s}`;
 };
 
 class MusicPlayer {
@@ -228,22 +228,21 @@ class MusicPlayer {
 	showUpcoming() {
 		const index = this.playlist.readHead;
 		const truncatedTrackList = this.playlist.playlist.slice(index, index + 5);
+		const maxTitleLength = 35;
 
 		const str = truncatedTrackList.reduce((prev, curr, idx) => {
-			const title = (curr.title.length < 30) ? curr.title : curr.title.slice(0, 27) + '...';
+			const title = (curr.title.length < maxTitleLength) ? curr.title : curr.title.slice(0, maxTitleLength - 3) + '...';
 			const durr = toTimeString(parseInt(curr.duration));
-			const diff = 50 - (title.length + durr.length);
-			const padding = (new Array(diff)).fill(' ').join('');
-			let line = `${index + idx}. ${title}${padding}${durr}\n`;
-			if (idx == 0) line = `**${line}**`;
-			return prev + line;
-		}, '');
+			const line = `${index + idx}. [${title}](${durr})`;
+			if (idx == 0) return prev + `**${line}**\n`;
+			return prev + line + '\n';
+		}, '```md\n');
 
 		if (this.playlist.playlist.length > index + 5) {
-			return str + `...${this.playlist.playlist.length - (index + 5)} more`;
+			return str + `...${this.playlist.playlist.length - (index + 5)} more` + '```';
 		}
 		else {
-			return str.trim();
+			return str.trim() + '```';
 		}
 	}
 
