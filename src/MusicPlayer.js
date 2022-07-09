@@ -13,8 +13,12 @@ const {
 
 const toTimeString = (seconds) => {
 	const date = new Date(0);
+	date.setHours(0);
 	date.setSeconds(seconds);
-	return `${date.getMinutes()}:${date.getSeconds()}`;
+	const h = date.getHours();
+	const m = date.getMinutes();
+	const s = date.getSeconds();
+	return `${((h == 0) ? '' : (((h < 10) ? '0' + h : h) + ':'))}${(m < 10) ? '0' + m : m}:${(s < 10) ? '0' + s : s}`;
 };
 
 class MusicPlayer {
@@ -22,21 +26,28 @@ class MusicPlayer {
 		this.player = createAudioPlayer();
 		this.connection = null;
 		this.voiceChannelIdleTimer = null;
+		this.musicPlayerIdleTimer = null;
 		this.stream = null;
 		this.playlist = new PlaylistManager();
 		this.isStopped = true;
+		this.textChannel = null;
+		this.lastSentMessage = null;
 
 		const setTimer = () => {
 			this.voiceChannelIdleTimer = setTimeout(this.destroy.bind(this), 5 * 60 * 1000);
+			this.musicPlayerIdleTimer = setTimeout(this.clearPlaylist.bind(this), 2 * 60 * 60 * 1000);
 		};
 		this.player.on(AudioPlayerStatus.Idle, () => {
 			setTimer();
 			if (this.isStopped) return;
-			else this.playNext();
+
+			this.deleteMesssage();
+			this.playNext();
 		});
 		this.player.on(AudioPlayerStatus.Paused, setTimer);
 		this.player.on(AudioPlayerStatus.Playing, () => {
 			if (this.timer !== null) clearTimeout(this.voiceChannelIdleTimer);
+			if (this.musicPlayerIdleTimer !== null) clearTimeout(this.musicPlayerIdleTimer);
 		});
 
 		this.player.on('error', console.error);
@@ -90,28 +101,58 @@ class MusicPlayer {
 		return insertionIndex;
 	}
 
-	play(url) {
+	async play(video) {
 		this.stop();
-		this.player.play(this.createStream(url));
+		const embed = this.createEmbed(video);
+		this.deleteMesssage();
+		this.lastSentMessage = await this.textChannel.send({
+			embeds: [embed],
+		});
 		this.isStopped = false;
+		this.player.play(this.createStream(video.video_url));
+	}
+
+	deleteMesssage() {
+		if (this.lastSentMessage !== null) {
+			this.lastSentMessage.delete();
+			this.lastSentMessage = null;
+		}
 	}
 
 	playTrack(idx = null) {
 		const video = this.playlist.selectTrack(idx);
-		if (video == null) return null;
-		this.play(video.video_url);
-		return video;
+		if (video == null) return false;
+		this.play(video);
+		return true;
 	}
 
 	playNext() {
+		if (this.isEmpty()) return false;
 		const video = this.playlist.selectNext();
-		if (video == null) return null;
-		this.play(video.video_url);
-		return video;
+		if (video == null) {
+			if (!this.isPlaying()) {
+				if (this.isStopped) {
+					this.playlist.readHead = -1;
+					this.isStopped = false;
+					this.playNext();
+					return true;
+				}
+				else {
+					this.isStopped = true;
+				}
+			}
+			return false;
+		}
+		this.play(video);
+		return true;
 	}
 
 	isPlaying() {
 		return this.player.state.status == AudioPlayerStatus.Playing;
+	}
+
+	isPaused() {
+		return this.player.state.status == AudioPlayerStatus.Paused;
 	}
 
 	togglePause() {
@@ -130,9 +171,7 @@ class MusicPlayer {
 	}
 
 	joinVC(chId, gId, adap) {
-		console.log('Attempting to connect to voice channel\n-----');
 		if (this.connection !== null) return console.log('Voice connection already exists\n-----');
-		console.log('Voice connection does NOT exists\n-----');
 		this.voiceChannelIdleTimer = setTimeout(() => this.destroy(), 5 * 60 * 1000);
 		this.connection = joinVoiceChannel({
 			channelId: chId,
@@ -142,14 +181,16 @@ class MusicPlayer {
 
 		this.connection.on('stateChange', (oldState, newState) => {
 			if (newState.status == 'destroyed') {
-				this.destroy();
+				if (this.connection === null) return;
+				this.stop();
+				this.connection = null;
 			}
 		});
 		this.connection.subscribe(this.player);
 	}
 
 	createStream(url) {
-		this.stream = ytdl(url, { filter: 'audioonly', highWaterMark: 1 << 25 });
+		this.stream = ytdl(url, { filter: 'audioonly', highWaterMark: 1 << 25, liveBuffer: 4900 });
 		return createAudioResource(this.stream, { inputType: StreamType.Arbitrary });
 	}
 
@@ -187,20 +228,21 @@ class MusicPlayer {
 	showUpcoming() {
 		const index = this.playlist.readHead;
 		const truncatedTrackList = this.playlist.playlist.slice(index, index + 5);
+		const maxTitleLength = 35;
 
 		const str = truncatedTrackList.reduce((prev, curr, idx) => {
-			const title = (curr.title.length < 30) ? curr.title : curr.title.slice(0, 27) + '...';
+			const title = (curr.title.length < maxTitleLength) ? curr.title : curr.title.slice(0, maxTitleLength - 3) + '...';
 			const durr = toTimeString(parseInt(curr.duration));
-			let line = `${index + idx}. ${title}\t${durr}\n`;
-			if (idx == 0) line = `**${line}**`;
-			return prev + line;
-		}, '');
+			const line = `${index + idx}. [${title}](${durr})`;
+			if (idx == 0) return prev + `**${line}**\n`;
+			return prev + line + '\n';
+		}, '```md\n');
 
 		if (this.playlist.playlist.length > index + 5) {
-			return str + `...${this.playlist.playlist.length - (index + 5)} more`;
+			return str + `...${this.playlist.playlist.length - (index + 5)} more` + '```';
 		}
 		else {
-			return str.trim();
+			return str.trim() + '```';
 		}
 	}
 

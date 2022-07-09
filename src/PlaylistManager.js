@@ -6,6 +6,7 @@ class PlaylistManager {
 
 	addItem(item) {
 		this.playlist.push(item);
+		console.log(this.playlist.length);
 	}
 
 	addItems(items = []) {
@@ -28,8 +29,7 @@ class PlaylistManager {
 	}
 
 	selectNext() {
-		if (this.playlist.length == 0 || this.readHead > this.playlist.length - 1) {
-			this.reset();
+		if (this.playlist.length == 0 || this.readHead >= this.playlist.length - 1) {
 			return null;
 		}
 		this.readHead += 1;
@@ -48,18 +48,6 @@ class PlaylistManager {
 		if (index > this.playlist.length - 1 || index < 0) return null;
 		this.readHead = index;
 		return this.playlist[this.readHead];
-	}
-
-	// todo
-	removeTrack(index) {
-		return index;
-	}
-
-	// todo
-	showUpcoming() {
-		return this.playlist.reduce((prev, curr, idx) => {
-			return prev + `${idx}. ${curr.title}\n`;
-		}, '') ;
 	}
 }
 

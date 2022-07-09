@@ -5,7 +5,10 @@ module.exports = {
 		.setName('shuffle')
 		.setDescription('Shuffles the playlist queue'),
 	async execute(interaction) {
-		interaction.client.mp.shuffle();
+		const mp = interaction.client.MusicPlayerCollection.get(interaction.guild.id);
+		if (mp === null || mp === undefined) return interaction.reply('You have not added any music');
+
+		mp.shuffle();
 		return interaction.reply('Music Shuffled').then((() => {
 			setTimeout(() => interaction.deleteReply(), 10 * 1000);
 		}));

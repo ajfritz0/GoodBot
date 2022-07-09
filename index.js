@@ -5,6 +5,7 @@ const fs = require('fs');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.commands = new Collection();
+client.MusicPlayerCollection = new Collection();
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -21,9 +22,6 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-const MusicPlayer = require('./src/MusicPlayer');
-client.mp = new MusicPlayer();
-
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -38,9 +36,12 @@ client.on('interactionCreate', async interaction => {
 
 	const start = (new Date()).getTime();
 	try {
-		console.log(`User Interaction: ${interaction.commandName} / User: ${interaction.user.username}`);
-		console.log(`Channel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}`);
-		console.log(`Create At: ${interaction.createdAt.toString()}`);
+		console.log(
+			'====================\n',
+			`\tCommand Name: ${interaction.commandName} / User: ${interaction.user.username}\n`,
+			`\tChannel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}\n`,
+			`\tCreated At: ${interaction.createdAt.toString()}`,
+		);
 		await command.execute(interaction);
 	}
 	catch (error) {
