@@ -15,6 +15,7 @@ module.exports = {
 		const url = interaction.options.getString('url');
 		const mpCollection = interaction.client.MusicPlayerCollection;
 		const guildId = interaction.guild.id;
+		const textChannel = interaction.channel;
 
 		if (!mpCollection.has(guildId)) mpCollection.set(guildId, new MusicPlayer());
 		const mp = mpCollection.get(guildId);
@@ -24,11 +25,13 @@ module.exports = {
 			await interaction.reply('You must be in a voice channel to use this command');
 			return;
 		}
-		const channelId = voiceState.channelId;
-		mp.joinVC(channelId, guildId, interaction.guild.voiceAdapterCreator);
+		const voiceChannelId = voiceState.channelId;
+		mp.joinVC(voiceChannelId, guildId, interaction.guild.voiceAdapterCreator);
 
 		await interaction.deferReply();
-		mp.textChannel = interaction.channel;
+
+		if (textChannel.type == 'GUILD_VOICE') mp.textChannel = interaction.guild.systemChannel;
+		else mp.textChannel = textChannel;
 		if (url !== null && url !== undefined) {
 			// if the playlist is empty or the music is stopped, queue and play
 			if (mp.isEmpty() || mp.isStopped) {
