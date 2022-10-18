@@ -1,6 +1,8 @@
 const { readFile, readdir } = require('fs/promises');
 const { resolve } = require('path');
 
+let bReady = false;
+
 const phrases = {
 	generic: {},
 	userCustom: {},
@@ -54,10 +56,11 @@ async function importData(filename) {
 		}
 	}
 	console.log('=====');
+	bReady = true;
 })();
 
 module.exports = message => {
-	if (message.author.bot) return;
+	if (message.author.bot || bReady == false || Object.keys(phrases.generic).length == 0) return;
 	const messageAuthorName = message.author.username;
 	const botID = message.client.user.id;
 	const chanName = message.channel.name;
