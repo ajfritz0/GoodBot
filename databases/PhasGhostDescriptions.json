@@ -1,0 +1,362 @@
+{
+	"Banshee": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Fingerprints\n- Ghost Orb\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Has a higher chance of performing singing ghost events over other types\nWill occasionally walk to the position of its target, similar to the Phantom\nWhen a Parabolic Mic is used, the Banshee has a chance of making a unique shriek-like paranormal sounds, instead of a whisper\nAt the start of the game, a random player is selected as the Banshee's target. If the player dies or leaves the game, a new target is selected\nChecks the target players sanity when trying to start a hunt, instead of the group average\nWhen it hunts, it will ignore all other players other than its target",
+		"footer": ""
+	},
+	"Demon": {
+		"color": "#C80000",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Fingerprints\n- Ghost Writing\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- ANY%* / 70%"
+			}
+		],
+		"desc": "Has an ability that allows it to hunt regardless of average sanity\nHas a hunt sanity threshold of 70%. This is independent from its hunt ability\nHas a minimum cooldown of 20s between hunts, instead of 25s\nSmudging a Demon will prevent hunts for only 60s, instead of 90s\nEffective range of a crucifix is 5 metres instead of 3\n",
+		"footer": ""
+	},
+	"Deogen": {
+		"color": "#00C8C8",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Ghost Writing\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 40%"
+			}
+		],
+		"desc": "More likely to interact with the D.O.T.S Projector and Ghost Writing Book on average than other ghosts\nIf a player asks a question through the Spirit Box while standing within 1m of the ghost, it has a 33% chance with each question to produce a unique repsone of constant heavy bull-like breathing\nDuing a hunt, the Deogen has constant line-of-sight of every player on the map. At the beginning of the hunt, the ghost will pick the nearest player to move towards\nSpeeds up when farther away from its target",
+		"footer": "*On Nightmare, always presents with Spirit Box*"
+	},
+	"Goryo": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Fingerprints\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Has a shorter wandering distance on average than other ghosts\nWill only interact with a D.O.T.S. Projector if no players are in the same room. In addition, its D.O.T.S. silhouette is only visible through a video camera",
+		"footer": "*On Nightmare, always presents with D.O.T.S.*"
+	},
+	"Hantu": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Fingerprints\n- Ghost Orb\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Cannot turn on the fuse box and is also twice as likely to turn off the fuse box\nDuring a hunt, ghost speed is dependent on room temp.  Lower temps enable the Hantu to move faster\nUnlike other ghosts, does not have line-of-sight acceleration during hunts\nWhen the Hantu's ghost model is visible during a hunt, it will emit freezing breath near its head when in a room with temps lower than 3c",
+		"footer": "*On Nightmare, always presents with Freezing Temps*"
+	},
+	"Jinn": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Fingerprints\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Cannot turn off a break directly\nWhen using its ability, it will lower the sanity of all players in the same room or otherwise within 3m of it by 25%. An EMF 2/5 reading will be generated at the fuse box",
+		"footer": ""
+	},
+	"Mare": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spriit Box\n- Ghost Orb\n- Ghost Writing"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 60%* / 40*"
+			}
+		],
+		"desc": "Cannot interact with lights to turn them on and is more likely to choose turning off lights as an interaction\nWhen it roams, it is more likely to choose an unlit room to roam into\nHas a higher chance of performing light-shattering ghost events over other types\nIf a player turns on a light near a Mare, it has a small chance to turn off the light almost immediately\nIf the Mare is in an unlit room, its hunt sanity threshold is 60%, otherwise it is 40%\n",
+		"footer": ""
+	},
+	"Moroi": {
+		"color": "#C87800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Ghost Writing\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Has an ability to curse a target through the folowing ways:\n-By successfully obtaining a spirit box response\n-Hearing ghost sounds through the Parabolic Mic\nWhen a player is cursed, their passive sanity drain will be doubled. Being in a lit area will not prevent this sanity drain, but leaving the investigation area will pause the curse. Consuming Sanity Pills removes the curse. Multiple players can be cursed at the same time\nMoroi's speed is dependent on the average sanity at the beginning of the hunt. At lower sanity, the ghost moves faster. Accelerates with line-of-sight. At max speed, the Moroi is faster than a Revenant\nWhen smudged during a hunt, the confusion duration is 12s instead of 6s\n",
+		"footer": "*On Nightmare, always presents with Spirit Box*"
+	},
+	"Myling": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Fingerprints\n- Ghost Writing"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Produces paranormal sounds through the Parabolic Mic more often\nWhen hunting, its footsteps and vocalizations sounds will only be audible to players within 12m, instead of the usual 20m",
+		"footer": ""
+	},
+	"Obake": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Fingerprints\n- Ghost Orb"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "Each time the Obake interacts with a valid surface, it has a 75% chance to leave fingerprints instead of the normal 100%\nWhen creating handprints or fingerprints, it has a 1 in 6 chance to create a unique pattern:\n-A six-fingered hand\n-Two fingerprints on a light switch\n-Five fingerprints on keyboards and Prison cell doors instead of four",
+		"footer": "*On Nightmare, always presents with Fingerprints*"
+	},
+	"Oni": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Freezing Temps\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "On average, interacts with objects more often, especially with people in the ghost room\nWhen performing a ghost event, the Oni:\n-Cannot perform the \"ghost mist\" event. THis event can cause a hiss, but \"fake hunt\"-type manifestation ghost events can also cause a hiss\n-Will prefer showing in its full form during a manifestation event as opposed to a shadowy or translucent form\n-Will double the sanity drain of other ghosts (20% instead of 10% when colliding with the target player)",
+		"footer": ""
+	},
+	"Onryo": {
+		"color": "#C87800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Ghost Orb\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 60%"
+			}
+		],
+		"desc": "On average, will blow out flame sources more frequently. Frequency increases with dead player count\nContrary to the journal, flames do not make the Onryo more likely to leave a room\nCounterintuitively, flames can both prevent hunts and cause a hunt:\n-If the Onryo attempts a hunt within 4 metres of a candle, it will blow out the candle flame instead, and the hunt will fail. The Crucifix takes priority over a lit flame. Candles extinguished in other ways do not count\n-Every third candle that the Onryo blows out will cause it to attempt to initiate a hunt, regardless of current average sanity (can be a delay of up to 6 seconds)",
+		"footer": ""
+	},
+	"Phantom": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Fingerprints\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "If a successfull photo is taken of the Phantom, it will be invisible\nHas an ability where it will choose a player and travel to their location. Will create EMF level 2 at its start position. During this event, will not produce any other manifestations and will not be able to initiate hunts, except cursed\nBeing within 10m of a Phantom while in line-of-sight will reduce the player's sanity by ~0.5% / sec. Applies to both events and hunts\nDuring a hunt, ghost will flash visible very 1 to 2 sec, as opposed to every 0.3 to 1",
+		"footer": ""
+	},
+	"Poltergeist": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Fingerprints\n- Ghost Writing"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "More likely to throw items. During a hunt, will always throw an item every 0.5 secs\nCan occasionally use an ability that allows it to throw multiple nearby items at once, creating EMF 2 reading and decreasing nearby player sanity. This ability works even with lights on\nIf there are no items near the ghost, it cannot use its ability",
+		"footer": ""
+	},
+	"Raiju": {
+		"color": "#C87800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Ghost Orb\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 65%* / 50%"
+			}
+		],
+		"desc": "When it manifests, the ghost will interfere with equipement up to 15m away on the same floor, instead of 10m\nWhen nearby at least one electronic equipment, its H.S.T. increases to 65%\nDuring hunts, when within certain distance of at least one piece of active electronic equipment, it will move at a fixed 2.5m/s:\n-Small map: 6m\n-Medium map: 8m\n-Large map: 10m\nOtherwise, it moves a base speed",
+		"footer": ""
+	},
+	"Revenant": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Ghost Orb\n- Ghost Writing\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "When hunting, it will have one of two speeds:\n- Without line-of-sight of a player: 1m/s\n- With line-of-sight of a player: 3m/s",
+		"footer": ""
+	},
+	"Shade": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Ghost Writing\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 35%"
+			}
+		],
+		"desc": "On average, less likely to perform interactions\nLess likely to perform ghost events at higher average sanities. At an average sanity of 50%, an attempted ghost event will always succeed\nWhen performing a ghost events, it prefers \"ghost mist\" events. If it does manifest for an event, it has a higher chance of appearing as a shadow\nIf at least one person is in the same room as a Shade, it will be unable to perform interactions that give off EMF 3 or initiate a hunt",
+		"footer": ""
+	},
+	"Spirit": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Spirit Box\n- Ghost Writing"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "When Smudge Stick is used near a spirit, it will not be able to initiate a hunt for 180 sec, instead of the base 90 sec",
+		"footer": ""
+	},
+	"Thaye": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Ghost Orb\n- Ghost Writing\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 75% - 15%"
+			}
+		],
+		"desc": "More likely to interact with D.O.T.S. and Ghost Writing Book\nHas an 'age' paramater that decreases its general activity. Attempts to age every 1-2 minutes: if at least one person is in the same room, it will age. Otherwise, it will wait 30 seconds and try again. Can age 10 times / contract\nH.S.T., hunt speed, and interaction/event rate decrease with age. From 75%, 2.75m/s, and 200% to 15%, 1m/s, and 50% respectively\nOver time, age given on Ouija Board increases\nDoes not speed up with line-of-sight",
+		"footer": ""
+	},
+	"Mimic": {
+		"color": "#C87800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Fingerprints\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- ?"
+			}
+		],
+		"desc": "Is able to imitate any type of ghost and inherit all of its features and abilities:\n-Interaction and event rates and preferences\n-H.S.T.\n-Hunt move speeds\n-Various forms of special abilities\nIt may also copy features of evidences, but not evidences itself\nIt will change the ghost type it imitates every 30 to 120 sec, but not during hunts",
+		"footer": "Always presents with Ghost Orbs"
+	},
+	"The Twins": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Spririt Box\n- Freezing Temps"
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "When it uses its ability, it will perform one interaction in the normal (3m) radius and one within a larger (16m) radius\nWhen it attempts to initiate a hunt, there is a 50% chance for it to begin at the main ghost or the decoy twin, which actually means the location where the last ranged interaction occurred\nEach 'twin' has different move speed during hunts. The main 'twin' moves at a base speed of 1.5m/s, while the decoy moves at 1.9m/s\nWhen attempting to hunt, the crucifix twin will only check on the main ghost",
+		"footer": ""
+	},
+	"Wraith": {
+		"color": "#00C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- EMF 5\n- Spirit Box\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "When stepping in a salt pile, it will never leave UV-visible footprints and will have a temporary increase in ghost activity\nWhen not hunting, has a chance to teleport within 3m of a random player, generating EMF 2 at its destination with a 25% of it being EMF 5",
+		"footer": ""
+	},
+	"Yokai": {
+		"color": "#C80000",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Spirit Box\n- Ghost Orb\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 80%* / 50%"
+			}
+		],
+		"desc": "Talking near it at any sanity increases its activity\nWhen using a Music Box, the Yokai must be closer to the player holding the box than other ghosts for a hunt to initiate\nWhen at least one player talks within a certain range of the Yokai, its H.S.T. is temporarily increased to 80%\nDuring hunts, a Yokai can only hear players or sense handheld active electronics within 2m of it",
+		"footer": ""
+	},
+	"Yurei": {
+		"color": "#C8C800",
+		"fields": [
+			{
+				"title": "Evidence",
+				"desc": "- Ghost Orb\n- Freezing Temps\n- D.O.T.S."
+			},
+			{
+				"title": "H.S.T.",
+				"desc": "- 50%"
+			}
+		],
+		"desc": "When Smudge Sticks are used on the Yurei, in addition to preventing hunts and increasing activity, it will not leave the room it currently inhabits for 90 sec\nHas an ability that will cause the following when used:\n-All players within 7.5m of the ghost will have their sanity decreased by 15%\n-If the ghost's current room has one or more open doors, it will also randomly select one door and close it rapidly",
+		"footer": ""
+	}
+}

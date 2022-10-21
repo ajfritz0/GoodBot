@@ -5,6 +5,7 @@ const fs = require('fs');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 
 client.commands = new Collection();
+client.autoComplete = new Collection();
 client.MusicPlayerCollection = new Collection();
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -19,7 +20,8 @@ for (const file of eventFiles) {
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
 	const command = require(`./commands/${file}`);
-	client.commands.set(command.data.name, command);
+	client.commands.set(command.data.name, command.execute);
+	if (command.autoComplete) client.autoComplete.set(command.data.name, command.autoComplete);
 }
 
 client.once('ready', () => {
@@ -42,7 +44,7 @@ client.on('interactionCreate', async interaction => {
 			`\tChannel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}\n`,
 			`\tCreated At: ${interaction.createdAt.toString()}`,
 		);
-		await command.execute(interaction);
+		await command(interaction);
 	}
 	catch (error) {
 		console.error(error);
@@ -50,6 +52,21 @@ client.on('interactionCreate', async interaction => {
 	}
 	const delta = (new Date()).getTime() - start;
 	console.log(`Execution finished in ${delta}ms`);
+});
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isAutocomplete()) return;
+
+	const command = client.autoComplete.get(interaction.commandName);
+	if (!command) return;
+
+	try {
+		await command(interaction);
+	}
+	catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'Error executing autocomplete' });
+	}
 });
 
 client.login(token);

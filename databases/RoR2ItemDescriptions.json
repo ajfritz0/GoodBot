@@ -1,0 +1,702 @@
+{
+	"Armor-Piercing Rounds": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nDeal an additional \"20%\" damage (\"+20%\" per stack) to bosses.```"
+	},
+	"Backup Magazine": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nAdd \"+1\" (\"+1\" per stack) charge of your Secondary Skill.```"
+	},
+	"Bison Steak": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases maximum health by \"25\" (\"+25\" per stack).```"
+	},
+	"Bundle of Fireworks": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nActivating an interactable launches \"8\" (\"+4\" per stack) fireworks that deal 300% base damage.```"
+	},
+	"Bustling Fungus": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nAfter standing still for 1 second, create a zone that heals for \"4.5%\" (\"+2.25%\" per stack) of your health every second to all allies with \"3m\" (\"+1.5m\" per stack).```"
+	},
+	"Cautious Slug": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases base health regeneration by \"+3 hp/s\" (\"+3 hp/s\" per stack) while outside of combat.```"
+	},
+	"Crowbar": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nDeal \"+75%\" (\"+75%\" per stack) damage to enemies above 90% health.```"
+	},
+	"Delicate Watch": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases damage by \"20%\" (\"20%\" per stack). Taking damage to below \"25% health\" breaks this item.```"
+	},
+	"Energy Drink": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nSprint speed is improved by \"25%\" (\"+25%\" per stack).```"
+	},
+	"Focus Crystal": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases damage to enemies within \"13m\" by \"20%\" (\"+20%\" per stack).```"
+	},
+	"Gasoline": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nKilling an enemy ignites all enemies within \"12m\" (\"+4m\" per stack) for \"150%\" base damage. Additionally, enemies burn for \"150%\" (\"+75%\" per stack) base damage.```"
+	},
+	"Item Scrap, White": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nDoes nothing. Prioritized when used with 3D Printers.```"
+	},
+	"Lens-Maker's Glasses": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nYour attacks have a \"10%\" (\"+10%\" per stack) chance to \"Critically Strike\", dealing double damage.```"
+	},
+	"Medkit": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\n2 seconds after getting hurt, heal for \"20\" plus an additional \"5%\" (\"+5%\" per stack) of maximum health.```"
+	},
+	"Mocha": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases attack speed by \"7.5%\" (\"+7.5%\" per stack) and movement speed by \"7%\" (\"+7%\" per stack).```"
+	},
+	"Monster Tooth": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nKilling an enemy spawns a healing orb that heals for \"8\" plus an additional \"2%\" (\"+2%\" per stack) of maximum health.```"
+	},
+	"Oddly-shaped Opal": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases armor by \"100\" (\"+100\" per stack) while out of danger.```"
+	},
+	"Paul's Goat Hoof": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases movement speed by \"14%\" (\"+14%\" per stack).```"
+	},
+	"Personal Shield Generator": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nGain a shield equal to \"8%\" (\"+8%\" per stack) of your maximum health. Recharges outside of danger.```"
+	},
+	"Power Elixir": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nTaking damage to below \"25%\" health consumes this item, healing you for \"75%\" of maximum health.```"
+	},
+	"Repulsion Armor Plate": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nReduce all incoming damage by \"5\" (\"+5\" per stack). Cannot be reduced below 1.```"
+	},
+	"Roll of Pennies": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nGain \"3\" (\"+3\" per stack) gold on taking damage from an enemy. \"Scales over time.\"```"
+	},
+	"Rusted Key": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nA hidden cache containing an item (\"80%\"/\"#{20%}\") will appear in a random location on each stage. Opening the cache consumes this item.```"
+	},
+	"Soldier's Syring": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nIncreases attack speed by \"15%\" (\"+15%\" per stack).```"
+	},
+	"Sticky Bomb": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\n\"5%\" (\"+5%\" per stack) chance on hit to attach a bomb to an enemy, detonating for \"180%\" TOTAL damage.```"
+	},
+	"Stun Grenade": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\n\"5%\" (\"+5%\" per stack) chance on hit to stun enemies for 2 seconds.```"
+	},
+	"Topaz Brooch": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nGain a temporary barrier on kill for \"15 health\" (\"+15\" per stack).```"
+	},
+	"Tougher Times": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\n\"15%\" (\"+15%\" per stack) chance to block incoming damage. Unaffected by luck.```"
+	},
+	"Tri-Tip Dagger": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\n\"10%\" (\"+10%\" per stack) chance to bleed an enemy for \"240%\" base damage.```"
+	},
+	"Warbanner": {
+		"color": "#ffffff",
+		"desc": "```coffeescript\nOn \"Level Up\" or starting the Teleporter event, drop a banner that strengthens all allies within \"16m\" (\"+8m\" per stack). Raise \"Attack\" and \"Movement\" speed by \"30%\".```"
+	},
+	"AtG Missile Mk. 1": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"10%\" chance to fire a missile that deals \"300%\" (\"+300%\" per stack) damage.```"
+	},
+	"Bandolier": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"18%\" (\"+10%\" per stack) chance to kill to drop an ammo pack that resets all skill cooldowns.```"
+	},
+	"Berzerker's Pauldron": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"Killing 4 enemies\" within \"1\" second sends you into a \"frenzy\" for \"6s\" (\"+4s\" per stack). Increases \"movement speed\" by \"50%\" and \"attack speed\" by \"100%\".```"
+	},
+	"Chronobauble": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"Slow\" enemies on hit for \"-60% movement speed\" for \"2s\" (\"+2s\" per stack).```"
+	},
+	"Death Mark": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nEnemies with \"4\" or more debuffs are \"marked for death\", increasing damage taken by \"50%\" from all sources for \"7\" (\"+7\" per stack) seconds.```"
+	},
+	"Fuel Cell": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nHold an \"additional equipment charge\" (\"+1\" per stack). \"Reduce equipment cooldown\" by \"15%\" (\"+15%\" per stack).```"
+	},
+	"Ghor's Tome": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"4%\" (\"+4%\" per stack) chance on kill to drop a treasure worth \"$25. Scales over time.\"```"
+	},
+	"Harvester's Scythe": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nGain \"5%\" critical chance. Critical strikes \"heal\" for \"8\" (\"+4\" per stack) \"health\".```"
+	},
+	"Hopoo Feather": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nGain \"+1\" (\"+1\" per stack) maximum jump count```"
+	},
+	"Hunter's Harpoon": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nKilling an enemy increases \"movement speed\" by \"125%\", fading over \"1\" (\"+0.5\" per stack) seconds.```"
+	},
+	"Ignitiion Tank": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nIgnite effects deal \"+300%\" (\"+300%\" per stack) more damage over time.```"
+	},
+	"Infusion": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nKilling an enemy increases your \"health permanently\" by \"1\" (\"+1\" per stack), up to a \"maximum\" of \"100\" (\"+100\" per stack) \"health\".```"
+	},
+	"Item Scrap, Green": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nDoes nothing. Prioritized when used with 3D Printers.```"
+	},
+	"Kjaro's Band": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nHits that deal \"more than 400% damage\" also blasts enemies with a \"runic flame tornado\", dealing \"300%\" (\"+300%\" per stack) TOTAL damage over time. Recharges every \"10\" seconds.```"
+	},
+	"Leeching Seed": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nDealing damage \"heals\" you for \"1\" (\"+1\" per stack) \"health\".```"
+	},
+	"Lepton Daisy": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nRelease a \"healing nova\" during the Teleporter event, \"healing\" all nearby allies for \"50%\" of their maximum health. Occurs \"1\" (\"+1\" per stack) times.```"
+	},
+	"Old Guillotine": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nInstantly kill Elite monsters \"below 13%\" (\"+13\" per stack) health.```"
+	},
+	"Old War Stealthkit": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nFalling \"below 25%\" health causes you to gain \"40% movement speed\" and \"invisibility\" for \"5s\". Recharges every \"30 seconds\" (\"-50%\" per stack).```"
+	},
+	"Predatory Instincts": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nGain \"5%\" critical chance. Critical Strikes increase \"attack speed\" by \"12%\". Maximum cap of \"36%\" (\"+24%\" per stack) \"attack speed\".```"
+	},
+	"Razorwire": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nGetting hit causes you to explode in a burst of razors, dealing \"160%\" damage. Hits of to \"5\" (\"+2\" per stack) targets in a \"25m\" (\"+10m\" per stack) radius.```"
+	},
+	"Red Whip": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nLeaving combat boosts your \"movement speed\" by \"30%\" (\"+30%\" per stack).```"
+	},
+	"Regenerating Scrap": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nDoes nothing. Prioritized when used with Uncommon 3D Printers. At the start of each stage, it regenerates.```"
+	},
+	"Rose Buckler": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"Increase armor\" by \"30\" (\"+30\" per stack) while \"sprinting\".```"
+	},
+	"Runald's Band": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nHits that deal \"more than 400% damage\" also blasts enemies with a \"runic ice blast\", \"slowing\" them by \"80%\" for \"3s\" (\"+3s\" per stack) and dealing \"250%\" (\"+250%\" per stack) TOTAL damage. Recharges every \"10\" seconds.```"
+	},
+	"Shipping Request Form": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nA \"delivery\" containing 2 items (79%,\"20%\",\"#{1%}\") will appear in a random location \"on each stage\".\n\"(Increases rarity chances of the items per stack)\"```"
+	},
+	"Shuriken": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nActivating your \"Primary skill\" also throws a \"shuriken\" that deals \"400%\" (\"+100%\" per stack) base damage. You can hold up to \"3\" (\"+1\" per stack) \"shurikens\" which all reload over \"10\" seconds.```"
+	},
+	"Squid Polyp": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nActivating an interactable summons a \"Squid Turret\" that attacks nearby enemies at \"100%\" (\"+100%\" per stack) \"attack speed\". Lasts \"30\" seconds.```"
+	},
+	"Ukulele": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"25%\" chance to fire \"chain lightning\" for \"80%\" TOTAL damage on up to \"3\" (\"+2\" per stack) targets within \"20m\" (\"+2m\" per stack).```"
+	},
+	"War Horn": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nActivating your Equipment give you \"+70% attack speed\" for \"8s\" (\"+4s\" per stack).```"
+	},
+	"Wax Quail": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\n\"Jumping\" while \"sprinting\" boosts you forward by \"10m\" (\"+10m\" per stack).```"
+	},
+	"Will-o'-the-wisp": {
+		"color": "#00ff00",
+		"desc": "```coffeescript\nOn killing an enemy, spawn a \"lava pillar\" in a \"12m\" (\"+2.4m\" per stack) radius for \"350%\" (\"+280%\" per stack) base damage.```"
+	},
+	"57 Leaf Clover": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nAll random effects are rolled \"+1\" (\"+1\" per stack) times for a \"favorable outcome\".```"
+	},
+	"Aegis": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nHealing past full grants you a \"temporary barrier\" for \"50%\" (\"+50%\" per stack) of the amount you \"healed\".```"
+	},
+	"Alien Head": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"Reduce skill cooldowns\" by \"25%\" (\"+25%\" per stack).```"
+	},
+	"Ben's Raincoat": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nPrevents \"1\" (\"+1\" per stack) \"debuff\" and instead grants a \"temporary barrier\" for \"10%\" of \"maximum health\". Recharges every \"5\" seconds.```"
+	},
+	"Bottled Chaos": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nTrigger a \"random equipment\" effect \"1\" (\"+1\" per stack) time(s).```"
+	},
+	"Brainstalks": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nUpon killing an elite monster, \"enter a frenzy\" for \"4s\" (\"+4s\" per stack) where \"kills have 0.5s cooldown\"```"
+	},
+	"Brilliant Behemoth": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nAll your \"attacks explode\" in a \"4m\" (\"+2.5m\" per stack) radius for a bonus \"60%\" TOTAL damage to nearby enemies.```"
+	},
+	"Ceremonial Dagger": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nKilling an enemy fires out \"3 homing daggers\" that deal \"150%\" (\"+150%\" per stack) base damage.```"
+	},
+	"Defensive Microbots": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nShoot down \"1\" (\"+1\" per stack) projectile(s) within \"20m\" every \"0.5 seconds\". \"Recharge rate scales with attack speed\".```"
+	},
+	"Dio's Best Friend": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nUpon death, this item will be consumed and you will \"return to life\" with \"3 seconds of invulnerability\".```"
+	},
+	"Frost Relic": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nKilling an enemy surrounds you with an \"ice storm\" that deals \"1200% damage per second\" and \"slows\" enemies by \"80%\" for \"1.5s\". The storm \"grows with every kill\", increasing its radius by \"2m\". Stacks up to \"18m\" (\"+12m\" per stack).```"
+	},
+	"H3AD-ST v2": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nIncrease \"jump height\". Creates a \"5m-100m\" radius \"kinetic explosion\" on hitting the ground, dealing \"1000%-10000%\" base damage that scales up with \"fall distance\". Recharges in \"10\" (\"-50%\" per stack) seconds.```"
+	},
+	"Happiest Mask": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nKilling enemies has a \"7%\" chance to \"spawn a ghost\" of the killed enemy with \"1500%\" damage. Lasts \"30s\" (\"+30s\" per stack).```"
+	},
+	"Hardlight Afterburner": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nAdd \"+2\" (\"+2\" per stack) charges of your \"Utility skill\". \"Reduces Utility skill cooldown\" by \"33%\".```"
+	},
+	"Interstellar Desk Plant": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nOn kill, plant a \"healing\" fruit seed that grows into a plant after \"5\" seconds.\nThe plant \"heals\" for \"5%\" of \"maximum health\" every 0.5 seconds to all allies with \"10m\" (\"+5.0m\" per stack). Lasts \"10\" seconds.```"
+	},
+	"Item Scrap, Red": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nDoes nothing. Prioritized when used with 3D Printers.```"
+	},
+	"Laser Scope": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"Critical strikes\" deal an additional \"100% damage\" (\"+100%\" per stack).```"
+	},
+	"N'kuhana's Opinion": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nStore \"100%\" (\"+100%\" per stack) of healing as \"Soul Energy\". After your \"Soul Energy\" reaches \"10%\" of your \"maximum health\", \"fires a skull\" that deals \"250%\" of your \"Soul Energy\" as \"damage\".```"
+	},
+	"Pocker I.C.B.M.": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nAll missile items and equipment fire an additional \"2 missiles\". Increase missile damage by \"0%\" (\"+50%\" per stack).```"
+	},
+	"Rejuvenation Rack": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"Heal 100%\" (\"+100%\" per stack) more.```"
+	},
+	"Resonance Disk": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nKilling \"4\" enemies in \"7\" seconds charges the Resonance Disk. The disc launches itself toward a target for \"300%\" base damage (\"+300%\" per stack), piercing all enemies it doesn't kill, and then explodes for \"1000%\" base damage (\"+1000%\" per stack). Returns to the user, striking all enemies along the way for \"300%\" base damage (\"+300%\" per stack).```"
+	},
+	"Sentient Meat Hook": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"20%\" (\"+20%\" per stack) chance on hit to fire \"homing hooks\" at up to \"10\" (\"+5\" per stack) enemies for \"100%\" TOTAL damage.```"
+	},
+	"Shattering Justice": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nAfter hitting an enemy \"5\" times, reduce their \"armor\" by \"60\" for \"8\" (\"+8\" per stack) seconds.```"
+	},
+	"Soulbound Catalyst": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"Kills reduce equipment cooldown by \"4s\" (\"+2s\" per stack).```"
+	},
+	"Spare Drone Parts": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nGain \"Col. Droneman\". Drones gain \"+50%\" (\"+50%\" per stack) attack speed and cooldown reduction. Drones gain \"10%\" chance to fire a \"missile\" on hit, dealing \"300%\" TOTAL damage. Drones gain an \"automatic chain gun\" that deals \"6x100%\" damage, bouncing to \"2\" enemies.```"
+	},
+	"Symbiotic Scorpion": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\n\"100%\" chance on hit to reduce armor by \"2\" (\"+2\" per stack) permanently.```"
+	},
+	"Unstable Tesla Coil": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nFire out \"lightning\" that hits \"3\" (\"+2\" per stack) enemies for \"200%\" base damage every \"0.5s\". The Tesla Coil switches off every \"10 seconds\".```"
+	},
+	"Wake of Vultures": {
+		"color": "#ff0000",
+		"desc": "```coffeescript\nGain the power of any killed elite monster for \"8s\" (\"+5s\" per stack).```"
+	},
+	"Artifact Key": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nA stone shard with immense power.```"
+	},
+	"Charged Perforator": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\n\"10%\" chance on hit to down a lightning strike, dealing \"500%\" (\"+500%\" per stack) damage.```"
+	},
+	"Defense Nucleus": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nKilling elite monsters spawns an Alpha Construct with bonus \"300%\" damage and \"300% health\". Limited to \"4\" (\"+4\" per stack).```"
+	},
+	"Empathy Cores": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nEvery 30 seconds, summon two Solus Probes that gain \"100%\" (\"+100%\" per stack) damage per \"ally on your team\".```"
+	},
+	"Genesis Loop": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nFalling below \"25% health\" causes you to explode, dealing \"6000%\" base damage. Recharges every \"30 / (2 + 1 per stack) seconds\"```"
+	},
+	"Halcyon Seed": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nSummon \"Aurelionite\" during the Teleporter event. It has \"100%\" (\"+50%\" per stack) damage and \"100%\" (\"+100%\" per stack) health.```"
+	},
+	"Irradiant Pearl": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nIncreases ALL stats by \"10%\" (\"+10%\" per stack).```"
+	},
+	"Item Scrap, Yellow": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nDoes Nothing. Prioritized when used with 3D Printers.```"
+	},
+	"Little Disciple": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nFire a \"tracking wisp\" for \"300%\" (\"+300%\" per stack) damage. Fires every \"1.6\" seconds while sprinting. Fire rate increases with \"movement speed\".```"
+	},
+	"Mired Urn": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nWhile in combat, the nearest \"1\" (\"+1\" per stack) enemies to you within \"13m\" will be tethered to you, dealing \"100%\" damage per second, applying \"tar\", and \"healing\" you for \"100%\" of the damage dealt.```"
+	},
+	"Molten Perforator": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\n\"10%\" on hit to call forth \"3 magma balls\" from an enemy, dealing \"300%\" (\"+300%\" per stack) damage each.```"
+	},
+	"Pearl": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nIncreases \"maximum health\" by \"10%\" (\"+10%\" per stack).```"
+	},
+	"Planula": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nHeal from incoming damage for \"15\" (\"+15\" per stack).```"
+	},
+	"Queen's Gland": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nEvery 30 seconds, \"summon a Beetle Guard\" with bonus \"300%\" damage and \"100%\" health. Can have up to \"1\" (\"+1\" per stack) Guards at a time.```"
+	},
+	"Shatterspleen": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nGain \"5% critical chance\". Critical strikes \"bleed\" enemies for \"240%\" base damage. \"Bleeding\" enemies \"explode\" on death for \"400%\" (\"+400%\" per stack) damage, plus an additional \"15%\" (\"+15%\" per stack) of their maximum health.```"
+	},
+	"Titanic Knurl": {
+		"color": "#ffff00",
+		"desc": "```coffeescript\nIncreases \"maximum health\" by \"40\" (\"+4\" per stack) and base \"health regeneration\" by \"1.6 hp/s\" (\"+1.6 hp/s\" per stack).```"
+	},
+	"Beads of Fealty": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nSeems to do nothing... \"but...\"```"
+	},
+	"Brittle Crown": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"30%\" chance on hit to gain \"2\" (\"+2\" per stack) gold. Scales over time.\n\"Lose gold\" on taking damage equal to \"100%\" (\"+100%\" per stack) of the \"maximum health percentage you lost\".```"
+	},
+	"Corpsebloom": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Heal 100%\" (\"+100%\" per stack) more. All healing is applied over time. Can heal for a maximum of \"10%\" (\"-50%\" per stack) of your health per second.```"
+	},
+	"Defiant Gouge": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nUsing a shrine \"summons enemies\" (\"stronger\" per stack) nearby. Scales over time.```"
+	},
+	"Egocentrism": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nEvery \"3\" (\"-50%\" per stack) seconds, gain an \"orbiting bomb\" that detonates on impact for \"360%\" damage, up to a maximum of \"3 bombs\" (\"+1\" per stack). Every \"60\" seconds, a random item is \"converted\" into this item.```"
+	},
+	"Essence of Heresy": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Replace your Special skill\" with \"Ruin\".\nDealing damage adds a stack of \"Ruin\" for \"10\" (\"+10\" per stack) seconds. Activating the skill \"detonates\" all Ruin stacks at unlimited range, dealing \"300%\" damage plus \"120%\" damage per stack of ruin. Recharges after \"8\" (\"+8\" per stack) seconds.```"
+	},
+	"Eulogy Zero": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nItems have a \"5%\" (\"5%\" per stack) chance to become a \"Lunar\" item instead.```"
+	},
+	"Focused Convergence": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nTeleporters charge \"30%\" (\"+30%\" per stack) \"faster\", but the size of the Teleporter zone is \"50%\" (\"-50%\" per stack) smaller.```"
+	},
+	"Gesture of the Drowned": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nReduce Equipment cooldown by \"50%\" (\"+15%\" per stack). Forces your Equipment to activate whenever it is off cooldown.```"
+	},
+	"Hooks of Heresy": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Replace your Secondary Skill\" with \"Slicing Maelstrom\".\nCharge up a projectile that deals \"875%\" damage per second to nearby enemies, exploding after \"3\" seconds to deal \"700%\" damage and \"root\" enemies for \"3\" (\"+3\" per stack) seconds. Recharges after \"5\" (\"+5\" per stack) seconds.```"
+	},
+	"Light Flux Pauldron": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nDecrease skill cooldowns by \"50%\" (\"+50%\" per stack). Decrease \"attack speed\" by \"50%\" (\"+50%\" per stack).```"
+	},
+	"Mercurial Rachis": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nCreates a Ward of Power in a random location nearby that buffs \"enemies\" and \"allies\" with \"16m\" (\"+50%\" per stack), causing them to deal \"+50%\" damage.```"
+	},
+	"Purity": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nAll skill cooldowns are reduced by \"2\" (\"+1\" per stack) seconds.  All random effects are rolled \"+1\" (\"+1\" per stack) times for an \"unfavorable outcome\".```"
+	},
+	"Shaped Glass": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nIncrease base damage by \"100%\" (\"+100\" per stack). `Reduce` maximum health by \"50%\" (\"+50%\" per stack).```"
+	},
+	"Stone Flux Pauldron": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nIncrease \"max health\" by \"100%\" (\"+100%\" per stack). 'Reduce' movement speed by \"50%\" (\"+50%\" per stack).```"
+	},
+	"Strides of Heresy": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Replace your Utility Skill\" with \"Shadowfade\".\nFade away, becoming \"intangible\" and gaining \"30%\" movement speed. \"Heal\" for \"18.2%\" (\"+18.2%\" per stack) of your \"maximum health\". Lasts \"3\" (\"+3\" per stack) seconds.```"
+	},
+	"Transcendence": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Convert all but 1 health\" into \"regenerating shields\". Gain \"50%\" (\"+25%\" per stack) \"maximum health\".```"
+	},
+	"Visions of Heresy": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Replace your Primary Skill\" with \"Hungering Gaze\".\n Fire a flurry of \"tracking shards\" that detonate after a delay, dealing \"120%\" base damage. Hold up to \"12\" charges (\"+12\" per stack) that reload after \"2\" seconds (\"+2\" per stack).```"
+	},
+	"Benthic Bloom": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"Upgrades 3\" (\"+3\" per stack) random items to items of the next \"higher rarity\" at the \"start of each stage\". \"#{ Corrupts all 57 Leaf Clovers }\".```"
+	},
+	"Encrusted Key": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nA \"hidden cache\" containing an item (60%,\"30%\",\"#{ 10% }\") will appear in a random location \"on each stage\". Opening the cache \"consumes\" this item. \"#{ Corrupts all Rusted Keys }\".```"
+	},
+	"Lost Seer's Lenses": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nYour attacks have a \"0.5%\" (\"+0.5%\" per stack) chance to \"instantly kill\" a \"non-Boss enemy\". \"#{ Corrupts all Lens-Maker's Glasses }\".```"
+	},
+	"Lysate Cell": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nAdd \"+1\" (\"+1\" per stack) charge of your \"Special skill\". Reduces Special skill cooldown by \"33%\". \"#{ Corrupts all Fuel Cells }\".```"
+	},
+	"Needletick": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"10%\" (\"+10%\" per stack) chance to \"collapse\" an enemy for \"400%\" base damage. \"#{ Corrupts all Tri-Tip Daggers }\".```"
+	},
+	"Newly Hatched Zoea": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nEvery \"60\" (\"-50%\" per stack) seconds, gain a random \"Void\" ally. Can have up to \"1\" (\"+1\" per stack) allies at a time. \"#{ Corrupts all Yellow items }\".```"
+	},
+	"Plasma Shrimp": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nGain a \"shield\" equal to \"10%\" of your maximum health. While you have a \"shield\", hitting an enemy fires a missile that deals \"40%\" (\"+40%\" per stack) TOTAL damage. \"#{ Corrupts all AtG Missile Mk. 1s }\".```"
+	},
+	"Pluripotent Larva": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"Upon death\", this item will be \"consumed\" and you will \"return to life\" with \"3 seconds of invulnerability\", and all of your items that can \"corrupted\" will be. \"#{ Corrupts all Dio's Best Friends }\".```"
+	},
+	"Polylute": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"25%\" chance to fire \"lightning\" for \"60%\" TOTAL damage up to \"3\" (\"+3\" per stack) times. \"#{ Corrupts all Ukuleles }\".```"
+	},
+	"Safer Spaces": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"Blocks\" incoming damage once. Recharges after \"15 seconds\" (\"-10%\" per stack). \"#{ Corrupts all Tougher Times }\".```"
+	},
+	"Singularity Band": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nHits that deal \"more than 400% damage\" also fire a black hole that \"draws enemies within 15m into its center\". Lasts \"5\" seconds before collapsing, dealing \"100%\" (\"+100%\" per stack) TOTAL damage. Recharges every \"20\" seconds. \"#{ Corrupts all Runald's and Kjaro's Bands }\".```"
+	},
+	"Tentabauble": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"5%\" (\"+5%\" per stack) chance on hit to root enemies for \"1s\" (\"+1s\" per stack). \"#{ Corrupts all Chronobaubles }\".```"
+	},
+	"Voidsent Flame": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\nUpon hitting an enemy at \"full health\", spawn a \"lava pillar\" in a \"12m\" (\"+2.4m\" per stack) radius for \"260%\" (\"+156%\" per stack) base damage. \"#{ Corrupts all Will-o'-the-wisps }\".```"
+	},
+	"Weeping Fungus": {
+		"color": "#bb00ff",
+		"desc": "```coffeescript\n\"Heals\" for \"2%\" (\"+2%\" per stack) of your health every second \"while sprinting\". \"#{ Corrupts all Bustling Fungus }\".```"
+	},
+	"Blast Shower": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\n\"Cleanse\" all negative effects. Includes debuffs, damage over time, and nearby projectiles.```"
+	},
+	"Disposable Missile Launcher": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nFire a swarm of \"12\" missiles that deal \"12x300% damage\".```"
+	},
+	"Eccentric Vase": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nCreate a \"quantum tunnel\" of up to \"1000m\" in length. Lasts 30 seconds.```"
+	},
+	"Executive Card": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nWhenever you make a gold purchase, get \"10%\" of the spent gold back. If the purchase is a \"multishop\" terminal, the other terminals will \"remain open\".```"
+	},
+	"Foreign Fruit": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nInstantly heal for \"50% of your maximum health\".```"
+	},
+	"Forgive Me Please": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nThrow a cursed doll out that \"triggers\" any \"On-Kill\" effects you have every \"1\" second for \"8\" seconds.```"
+	},
+	"Fuel Array": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nLooks like it could power something. \"#{ EXTREMELY UNSTABLE }\".```"
+	},
+	"Gnarled Woodsprite": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nGain a Woodsprite follower that heals for \"1.5% of your maximum health/second\". Can be sent to an ally to heal them for \"10% of their maximum health\".```"
+	},
+	"Goobo Jr.": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nSpawns a gummy clone that has \"300% damage\" and \"300% health\". Expires in \"30\" seconds.```"
+	},
+	"Gorag's Opus": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nAll allies enter a \"frenzy\" for \"7\" seconds. Increases \"movement speed\" by \"50%\" and \"attack speed\" by \"100%\".```"
+	},
+	"Jade Elephant": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nGain \"500 armor\" for \"5 seconds\".```"
+	},
+	"Milky Chrysalis": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nSprout wings and \"fly for 15 seconds\". Gain \"+20% movement speed\" for the duration.```"
+	},
+	"Molotov": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nThrow \"6\" molotov cocktails that \"ignites\" enemies for \"500% base damage\". Each molotov leaves a burning area for \"200% damage per second\".```"
+	},
+	"Ocular HUD": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nGain \"+100% Critical Strike Chance\" for \"8\" seconds.```"
+	},
+	"Preon Accumulator": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nFires preon tendrils, zapping enemies within \"35m\" for up to \"600% damage/second\". On contact, detonate in an enormous \"20m\" explosion for \"4000% damage\".```"
+	},
+	"Primordial Cube": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nFire a black hole that \"draws enemies within 30m into its center\". Lasts \"10\" seconds.```"
+	},
+	"Radar Scanner": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\n\"Reveal\" all interactables within \"500m\" for \"10 seconds\".```"
+	},
+	"Recycler": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\n\"Transform\" an item or equipment into a different one. \"Can only be converted into the same tier one time\".```"
+	},
+	"Remote Caffeinator": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nRequest an \"Eclipse Zero Vending Machine\" from the \"UES Safe Travels\". Delivery guaranteed in \"5 seconds\", dealing \"2000% damage\". \"Heal\" up to 3 targets for \"25% of their maximum health\".```"
+	},
+	"Royal Capacitor": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nCall down a lightning strike on a targeted monster, dealing \"3000% damage\" and \"stunning\" nearby monsters.```"
+	},
+	"Sawmerang": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nThrow \"three large saw blades\" that slice through enemies for \"3x400%\" damage. Also deals an additional \"3x100%\" damage per second while bleeding enemies. Can strike enemies again on the way back.```"
+	},
+	"Super Massive Leech": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\n\"Heal\" for \"20%\" of the damage you deal. Lasts \"8\" seconds.```"
+	},
+	"The Back-up": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nCall \"4 Strike Drones\" to fight for you. Lasts 25 seconds.```"
+	},
+	"The Crowdfunder": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nFires a continuous barrage that deals \"100% damage per bullet\". Costs $1 per bullet. Cost increases over time.```"
+	},
+	"Trophy Hunter's Tricorn": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nExecute an enemy capable of spawning a \"unique reward\", and it will drop that item. Equipment is \"consumed\" on use.```"
+	},
+	"Trophy Hunter's Tricorn (Consumed)": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nLooks kinda cool, but that's about it.```"
+	},
+	"Volcanic Egg": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nTurn into a \"draconic fireball\" for \"5\" seconds. Deal \"500% damage\" on impact. Detonates at the end for \"800% damage\".```"
+	},
+	"Effigy of Grief": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nALL characters within are \"slowed by 50%\" and have their \"armor reduced by 20\". Can place up to \"5\".```"
+	},
+	"Glowing Meteorite": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\n\"Rain meteors\" from the sky, damaging ALL characters for \"600% damage per blast\". Lasts 20 seconds.```"
+	},
+	"Hellfire Tincture": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nIgnite ALL characters within 15m for 12s. Deal \"5% of your maximum health / second as burning damage\". The burn is \"0.5x\" stronger yourself, \"0.25x\" stronger on allies, and \"24x\" stronger on enemies.```"
+	},
+	"Spinel Tonic": {
+		"color": "#0000ff",
+		"desc": "```coffeescript\nDrink the Tonic, gaining a boost for 20 seconds. Increases damage by \"+100%\". Increases \"attack speed\" by \"+70%\". Increases \"armor\" by \"+20\". Increases \"maximum health\" by \"+50%\". Increases passive health regeneration by \"+300%\". Increases \"movement speed\" by \"+30%\".\nWhen the tonic wears off, you have a \"20%\" chance to gain a \"#{ Tonic Affliction, reducing all of your stats by -5% (-5% per stack) }.```"
+	},
+	"Her Biting Embrace": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of ice.```"
+	},
+	"His Reassurance": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of earth.```"
+	},
+	"Ifrit's Distinction": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of fire.```"
+	},
+	"N'kuhana's Retort": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of corruption.```"
+	},
+	"Shared Design": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of perfection.```"
+	},
+	"Silence Between Two Strikes": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of lightning.```"
+	},
+	"Spectral Circlet": {
+		"color": "#ff7700",
+		"desc": "```coffeescript\nBecome an aspect of incorporeality.```"
+	}
+}
