@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,7 +10,7 @@ module.exports = {
 		const mp = mpCollection.get(interaction.guild.id);
 		if (mp === null || mp === undefined) return interaction.reply('You have not added any music');
 		const content = mp.showUpcoming();
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle('Queued songs:')
 			.setDescription(content);
 		interaction.reply({
