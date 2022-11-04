@@ -1,7 +1,7 @@
 const ytdl = require('ytdl-core');
 const PlaylistManager = require('./PlaylistManager');
 const ytpl = require('ytpl');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const {
 	AudioPlayerStatus,
@@ -212,7 +212,7 @@ class MusicPlayer {
 
 	createEmbed(video) {
 		const timeString = toTimeString(video.duration);
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(video.title)
 			.setAuthor({
 				name: video.author_name,
@@ -221,7 +221,9 @@ class MusicPlayer {
 			.setURL(video.video_url)
 			.setThumbnail(video.thumbnail)
 			.setTimestamp()
-			.addField('Duration', timeString, true);
+			.addFields(
+				{ name: 'Duration', value: timeString, inline: true },
+			);
 		return embed;
 	}
 
