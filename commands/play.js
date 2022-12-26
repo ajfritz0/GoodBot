@@ -7,7 +7,13 @@ module.exports = {
 		.setDescription('Play youtube audio')
 		.addStringOption(option =>
 			option.setName('url')
-				.setDescription('Link to youtube video')),
+				.setDescription('Link to youtube video'))
+		.addStringOption(option =>
+			option.setName('query')
+				.setDescription('A search query'))
+		.addIntegerOption(option =>
+			option.setName('index')
+				.setDescription('Play the Nth returned track when searching a query')),
 	async execute(interaction) {
 		const voice = interaction.guild.voiceStates.cache;
 		const author = interaction.member;

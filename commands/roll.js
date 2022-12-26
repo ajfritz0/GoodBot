@@ -12,9 +12,14 @@ module.exports = {
 		.addStringOption((option) =>
 			option.setName('dice')
 				.setDescription('Default: 1d6'),
-		),
+		)
+		.addBooleanOption((option) => {
+			return option.setName('hidden')
+				.setDescription('Make the result visible only to the user');
+		}),
 	async execute(interaction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
+		const isHidden = interaction.options.getBoolean('hidden');
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {
@@ -48,6 +53,6 @@ module.exports = {
 			}
 		}
 
-		return interaction.reply(reply.join(' ').trim());
+		interaction.reply({ content: reply.join(' ').trim(), ephemeral: isHidden });
 	},
 };
