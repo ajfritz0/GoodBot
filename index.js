@@ -38,12 +38,11 @@ client.on('interactionCreate', async interaction => {
 
 	const start = (new Date()).getTime();
 	try {
-		console.log(
-			'====================\n',
-			`\tCommand Name: ${interaction.commandName} / User: ${interaction.user.username}\n`,
-			`\tChannel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}\n`,
-			`\tCreated At: ${interaction.createdAt.toString()}`,
-		);
+		let consoleStr = `====================\n\tCommand Name: ${interaction.commandName} / User: ${interaction.user.username}\n`;
+		if (interaction.channel) consoleStr += `\tChannel Name: ${interaction.channel.name} / Guild Name: ${interaction.guild.name}\n`;
+		consoleStr += `Created At: ${interaction.createdAt.toString()}`;
+
+		console.log(consoleStr);
 		await command(interaction);
 	}
 	catch (error) {
