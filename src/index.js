@@ -1,5 +1,5 @@
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('./cfg/config.json');
+const { token } = require('../cfg/config.json');
 const fs = require('fs');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
@@ -13,13 +13,13 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 for (const file of eventFiles) {
 	const eventName = file.slice(0, -3);
 	console.log(`Loading event module: ${file}`);
-	const cb = require(`./events/${file}`);
+	const cb = require(`../events/${file}`);
 
 	client.on(eventName, cb);
 }
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
-	const command = require(`./commands/${file}`);
+	const command = require(`../commands/${file}`);
 	client.commands.set(command.data.name, command.execute);
 	if (command.autoComplete) client.autoComplete.set(command.data.name, command.autoComplete);
 }
