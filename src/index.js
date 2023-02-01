@@ -1,12 +1,14 @@
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('../cfg/config.json');
+const { token, clientId, guildId } = require('../cfg/config.json');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const modeFlag = process.argv[2];
 const fs = require('fs');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 
 client.commands = new Collection();
 client.autoComplete = new Collection();
-client.MusicPlayerCollection = new Collection();
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
