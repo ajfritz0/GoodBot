@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,25 +9,20 @@ module.exports = {
 		const str =
 			'General Commands:\n' +
 			'"/4chan": Pull a random post from 4chan a board\n' +
+			'"/choose": Choose an item from a provided comma-seperated list\n' +
 			'"/date": Returns the current date and time\n' +
 			'"/flip": Flips a coin\n' +
 			'"/hackernews": Pulls articles from HackerNews\n' +
 			'"/help": Displays this message\n' +
 			'"/imgur": Pull a random image from imgur\n' +
 			'"/murder": MURDER\n' +
+			'"/phas": Returns information about ghosts in Phasmophobia\n' +
 			'"/random": Rolls a random number (default 0-100)\n' +
+			'"/roi": Returns information about items in Risk of Rain 2\n' +
 			'"/roll": Rolls some dice (default 1d6)\n' +
 			'"/timer": Sends a timed message to the channel\n' +
-			'"/wiki": Pulls a wikipedia article based on a query\n' +
-			'Music Player Commands:\n' +
-			'\t"/play": Play or queue a youtube link\n' +
-			'\t"/pause": Pause music\n' +
-			'\t"/skip": Skip to new track\n' +
-			'\t"/stop": Stop the music\n' +
-			'\t"/clear": Clear the playlist\n' +
-			'\t"/queue": View music queue\n' +
-			'\t"/shuffle": Shuffle playlist\n';
-		const embed = new MessageEmbed()
+			'"/wiki": Pulls a wikipedia article based on a query\n';
+		const embed = new EmbedBuilder()
 			.setDescription('```bash\n' + str + '```');
 		interaction.reply({
 			embeds: [embed],

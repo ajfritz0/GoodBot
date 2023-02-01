@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
 				return pages[keys[0]]['extract'];
 			})(),
 		};
-		const myembed = new MessageEmbed()
+		const myembed = new EmbedBuilder()
 			.setColor('#0099ff')
 			.setTitle(info.title)
 			.setURL(info.url)

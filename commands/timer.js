@@ -37,7 +37,7 @@ function listTimers() {
 	const keys = Object.keys(_timers);
 	if (keys.length == 0) return 'No Timers';
 	const str = keys.reduce((acc, val) => {
-		return acc + `${val} : ${_timers[val].date.toLocaleTimeString()} : ${_timers[val].msg}`;
+		return acc + `${val} : ${_timers[val].date.toLocaleTimeString()} : ${_timers[val].msg}\n`;
 	}, '');
 	return str;
 }
