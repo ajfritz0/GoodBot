@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
 const getRandomIndex = (struct) => {
@@ -60,12 +60,13 @@ const getRandomThread = async (board) => {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('4chan')
-		.setDescription('4chan module')
+		.setDescription('Pull a random link to a  post on a specified 4chan board')
 		.addStringOption(option =>
 			option.setName('board')
 				.setDescription('The board to pull from')
 				.setRequired(true),
 		),
+	helpMessage: '',
 	async execute(interaction) {
 		await interaction.deferReply();
 		const board = interaction.options.getString('board');

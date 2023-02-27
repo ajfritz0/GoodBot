@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const phasMetadata = require('../databases/PhasGhostDescriptions.json');
 
 module.exports = {
@@ -7,6 +6,7 @@ module.exports = {
 		.setName('phas')
 		.setDescription('Returns information about ghosts in Phasmophobia')
 		.addStringOption(option => option.setName('ghost').setDescription('Ghost Name').setAutocomplete(true)),
+	helpMessage: '',
 	async execute(interaction) {
 		const ghostName = interaction.options.getString('ghost');
 		const ghostData = phasMetadata[ghostName];

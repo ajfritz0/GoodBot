@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 const { clientId } = require('../cfg/imgur.json');
 
@@ -14,9 +14,10 @@ module.exports = {
 		.setDescription('Post an image from Imgur')
 		.addStringOption(option =>
 			option.setName('query')
-				.setDescription('Image search query.')
+				.setDescription('Image query')
 				.setRequired(true),
 		),
+	helpMessage: '',
 	async execute(interaction) {
 		await interaction.deferReply();
 		const q = interaction.options.getString('query');

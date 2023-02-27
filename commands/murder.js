@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('murder')
-		.setDescription('murders'),
+		.setDescription('Murders'),
+	helpMessage: 'murder',
 	async execute(interaction) {
 		await interaction.reply('🗡️🔪'.repeat(200));
 	},

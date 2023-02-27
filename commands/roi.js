@@ -1,12 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const rorMetadata = require('../databases/RoR2ItemDescriptions.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roi')
 		.setDescription('Returns information about items in Risk of Rain 2')
-		.addStringOption(option => option.setName('item').setDescription('Item name to search').setAutocomplete(true)),
+		.addStringOption(option => option.setName('item').setDescription('Item name').setAutocomplete(true)),
+	helpMessage: '',
 	async execute(interaction) {
 		const itemName = interaction.options.getString('item');
 		const itemData = rorMetadata[itemName];

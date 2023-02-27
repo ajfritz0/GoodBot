@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const getPostUrl = (id) => {
 	return `https://news.ycombinator.com/item?id=${id}`;
@@ -28,11 +28,12 @@ const getTopPosts = async (numPosts) => {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('hackernews')
-		.setDescription('Top Hackers News Posts')
+		.setDescription('Retrieve the top posts from HackerNews')
 		.addStringOption(option =>
 			option.setName('numposts')
 				.setDescription('The number of posts to return'),
 		),
+	helpMessage: '',
 	async execute(interaction) {
 		await interaction.deferReply();
 		const numPosts = interaction.options.getString('numposts') || 3;

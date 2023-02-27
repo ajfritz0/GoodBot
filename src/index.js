@@ -1,14 +1,13 @@
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token, clientId, guildId } = require('../cfg/config.json');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const modeFlag = process.argv[2];
+const { token } = require('../cfg/config.json');
 const fs = require('fs');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 
 client.commands = new Collection();
 client.autoComplete = new Collection();
+client.helpMessages = new Collection();
+const arrCommandData = [];
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -22,8 +21,16 @@ for (const file of eventFiles) {
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
 	const command = require(`../commands/${file}`);
+
+	arrCommandData.push(command.data);
 	client.commands.set(command.data.name, command.execute);
+
 	if (command.autoComplete) client.autoComplete.set(command.data.name, command.autoComplete);
+
+	client.helpMessages.set(command.data.name, {
+		summary: command.data.description,
+		message: command.helpMessage,
+	});
 }
 
 client.once('ready', () => {
@@ -70,4 +77,8 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-client.login(token);
+require('./deploy')(arrCommandData)
+	.then(() => {
+		client.login(token);
+	})
+	.catch(console.error);

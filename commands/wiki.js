@@ -1,15 +1,15 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
-		.setDescription('Search Wikipedia')
+		.setDescription('Returns a link to a Wikipedia article')
 		.addStringOption(option =>
 			option.setName('query')
 				.setDescription('Search term')
 				.setRequired(true)),
+	helpMessage: '',
 	async execute(interaction) {
 		await interaction.deferReply();
 		const q = interaction.options.getString('query');
