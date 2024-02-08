@@ -21,7 +21,7 @@ class ConfigManager {
 			restrictedChannels: this.restrictedChannels,
 		};
 		const filename = join(process.cwd(), `./cfg/guilds/${this.id}.json`);
-		writeFile(join(filename, JSON.stringify(data), { encoding: 'utf-8' }))
+		writeFile(filename, JSON.stringify(data), { encoding: 'utf-8' })
 			.catch(err => {
 				if (err) console.error(`[WRITE FAILURE] Unable to write to file ${filename}`);
 			})
