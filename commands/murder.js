@@ -5,7 +5,7 @@ module.exports = {
 		.setName('murder')
 		.setDescription('Murders'),
 	helpMessage: 'murder',
-	async execute(interaction) {
-		await interaction.reply('🗡️🔪'.repeat(200));
+	async execute() {
+		return '🗡️🔪'.repeat(200);
 	},
 };

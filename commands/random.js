@@ -16,6 +16,6 @@ module.exports = {
 	async execute(interaction) {
 		const x = interaction.options.getInteger('min_value') || 1,
 			y = interaction.options.getInteger('max_value') || 100;
-		await interaction.reply(randInt(x, y).toString());
+		return randInt(x, y).toString();
 	},
 };

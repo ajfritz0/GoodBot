@@ -68,9 +68,8 @@ module.exports = {
 		),
 	helpMessage: '',
 	async execute(interaction) {
-		await interaction.deferReply();
 		const board = interaction.options.getString('board');
 		const { link, text } = await getRandomThread(board);
-		return await interaction.editReply(`${text}\n - ${link}`);
+		return `${text}\n - ${link}`;
 	},
 };

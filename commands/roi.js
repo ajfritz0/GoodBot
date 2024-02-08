@@ -11,13 +11,13 @@ module.exports = {
 		const itemName = interaction.options.getString('item');
 		const itemData = rorMetadata[itemName];
 
-		if (!itemData) return interaction.reply('Item does not exist');
+		if (!itemData) return 'Item does not exist';
 
 		const itemEmbed = new EmbedBuilder()
 			.setColor(itemData['color'])
 			.setTitle(itemName)
 			.setDescription(itemData['desc']);
-		return interaction.reply({ embeds: [itemEmbed] });
+		return { embeds: [itemEmbed] };
 	},
 	async autoComplete(interaction) {
 		const keys = Object.keys(rorMetadata);

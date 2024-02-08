@@ -14,10 +14,10 @@ module.exports = {
 
 		try {
 			const date = today.toLocaleString('en-US', { timeZone: tz });
-			return await interaction.reply(date);
+			return date;
 		}
 		catch (e) {
-			return await interaction.reply(`${tz} is not a valid timezone`);
+			return `${tz} is not a valid timezone`;
 		}
 	},
 };

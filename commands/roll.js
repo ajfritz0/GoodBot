@@ -48,13 +48,13 @@ module.exports = {
 			}
 			catch (err) {
 				console.log('FOUND AN ERROR', err);
-				return interaction.reply({
+				return {
 					content: err.message,
 					ephemeral: true,
-				});
+				};
 			}
 		}
 
-		interaction.reply({ content: reply.join(' ').trim(), ephemeral: isHidden });
+		return { content: reply.join(' ').trim(), ephemeral: isHidden };
 	},
 };

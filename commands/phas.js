@@ -11,7 +11,7 @@ module.exports = {
 		const ghostName = interaction.options.getString('ghost');
 		const ghostData = phasMetadata[ghostName];
 
-		if (!ghostData) return interaction.reply('Ghost does not exist');
+		if (!ghostData) return 'Ghost does not exist';
 
 		const infoEmbed = new EmbedBuilder()
 			.setColor(ghostData['color'])
@@ -22,7 +22,7 @@ module.exports = {
 				{ name: ghostData['fields'][1]['title'], value: ghostData['fields'][1]['desc'], inline: true },
 			)
 			.setFooter({ text: ghostData['footer'] == '' ? null : ghostData['footer'] });
-		return interaction.reply({ embeds: [infoEmbed] });
+		return { embeds: [infoEmbed] };
 	},
 	async autoComplete(interaction) {
 		const keys = Object.keys(phasMetadata);

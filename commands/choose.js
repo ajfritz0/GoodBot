@@ -9,6 +9,6 @@ module.exports = {
 	helpMessage: '',
 	async execute(interaction) {
 		const items = interaction.options.getString('items').split(',').map(x => x.trim());
-		interaction.reply(items[Math.floor(Math.random() * items.length)]);
+		return items[Math.floor(Math.random() * items.length)];
 	},
 };

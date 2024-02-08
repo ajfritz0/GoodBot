@@ -35,9 +35,8 @@ module.exports = {
 		),
 	helpMessage: '',
 	async execute(interaction) {
-		await interaction.deferReply();
 		const numPosts = interaction.options.getString('numposts') || 3;
 		const response = await getTopPosts(numPosts);
-		return await interaction.editReply(response);
+		return response;
 	},
 };

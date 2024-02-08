@@ -17,12 +17,12 @@ module.exports = {
 			for (const [key, value] of interaction.client.helpMessages) {
 				helpMessage.push(`"${key}": ${value.summary}\n`);
 			}
-			return interaction.reply(`\`\`\`bash\n${helpMessage.join('')}\`\`\``);
+			return `\`\`\`bash\n${helpMessage.join('')}\`\`\``;
 		}
 		else {
 			const msg = interaction.client.helpMessages.get(cmd);
-			if (msg == null || msg == undefined) return interaction.reply({ content: 'That commands does not exist', ephemeral: true });
-			else return interaction.reply(`\`\`\`bash\n${msg.message}\`\`\``);
+			if (msg == null || msg == undefined) return { content: 'That commands does not exist', ephemeral: true };
+			else return `\`\`\`bash\n${msg.message}\`\`\``;
 		}
 	},
 };

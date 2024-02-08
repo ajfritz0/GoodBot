@@ -5,8 +5,8 @@ module.exports = {
 		.setName('flip')
 		.setDescription('Flip a coin'),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute() {
 		const coin = Math.floor(Math.random() * 2);
-		await interaction.reply((coin) ? 'Heads' : 'Tails');
+		return ((coin) ? 'Heads' : 'Tails');
 	},
 };
