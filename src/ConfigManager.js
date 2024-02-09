@@ -8,8 +8,9 @@ class ConfigManager {
 		this.defaultRole = null;
 		this.disabledCommands = {};
 		this.restrictedCommands = {};
-		this.restrictedUsers = {};
-		this.restrictedChannels = {};
+		this.disabledRoles = {};
+		this.disabledUsers = {};
+		this.disabledChannels = {};
 	}
 
 	save() {
@@ -17,8 +18,9 @@ class ConfigManager {
 			defaultRole: this.defaultRole,
 			disabledCommands: this.disabledCommands,
 			restrictedCommands: this.restrictedCommands,
-			restrictedUsers: this.restrictedUsers,
-			restrictedChannels: this.restrictedChannels,
+			disabledRoles: this.disabledRoles,
+			disabledUsers: this.disabledUsers,
+			disabledChannels: this.disabledChannels,
 		};
 		const filename = join(process.cwd(), `./cfg/guilds/${this.id}.json`);
 		writeFile(filename, JSON.stringify(data), { encoding: 'utf-8' })
@@ -34,48 +36,44 @@ class ConfigManager {
 			this.defaultRole = data['defaultRole'];
 			this.disabledCommands = data['disabledCommands'];
 			this.restrictedCommands = data['restrictedCommands'];
-			this.restrictedUsers = data['restrictedUsers'];
-			this.restrictedChannel = data['restrictedChannels'];
+			this.disabledRoles = data['disabledRoles'];
+			this.disabledUsers = data['disabledUsers'];
+			this.disabledChannels = data['disabledChannels'];
 		}
 		catch (e) {
 			console.error(`Unable to load guild config file ${this.id}.json`);
 		}
 	}
 
-	addDefaultRole(roleId) {
-		this.defaultRole = roleId;
+	auth(authProps = {}) {
+		for (const key in authProps) {
+			const name = authProps[key];
+			if (key == 'command') { this.restrictedCommands[authProps[key]] = false; }
+			else if (key == 'role') { this.disabledRoles[name] = false; }
+			else if (key == 'user') { this.disabledUsers[name] = false; }
+			else if (key == 'channel') { this.disabledChannels[name] = false; }
+		}
 		this.save();
 	}
-	enableCommand(name) {
-		this.disabledCommands[name] = false;
+
+	deauth(authProps = {}) {
+		for (const key in authProps) {
+			const name = authProps[key];
+			if (key == 'command') { this.restrictedCommands[name] = true; }
+			else if (key == 'role') { this.disabledRoles[name] = true; }
+			else if (key == 'user') { this.disabledUsers[name] = true; }
+			else if (key == 'channel') { this.disabledChannels[name] = true; }
+		}
 		this.save();
 	}
-	disableCommand(name) {
-		this.disabledCommands[name] = true;
+
+	enableCommand(commandName) {
+		this.disabledCommands[commandName] = false;
 		this.save();
 	}
-	restrictCommand(name) {
-		this.restrictedCommands[name] = true;
-		this.save();
-	}
-	unrestrictCommand(name) {
-		this.restrictedCommands[name] = false;
-		this.save();
-	}
-	restrictUser(userId) {
-		this.restrictedUsers[userId] = true;
-		this.save();
-	}
-	unrestrictUser(userId) {
-		this.restrictedUsers[userId] = false;
-		this.save();
-	}
-	restrictChannel(channelId) {
-		this.restrictedChannels[channelId] = true;
-		this.save();
-	}
-	unrestrictChannel(channelId) {
-		this.restrictedChannels[channelId] = false;
+
+	disableCommand(commandName) {
+		this.disabledCommands[commandName] = true;
 		this.save();
 	}
 }

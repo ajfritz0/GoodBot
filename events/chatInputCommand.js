@@ -16,10 +16,13 @@ module.exports = {
 		const command = interaction.client.commands.get(interaction.commandName);
 		if (!command) return;
 
-		if (guildConfig.restrictedChannels[interaction.channel.id]) return interaction.reply({ content: 'Commands are disabled for this channel', ephemeral: true });
-		if (guildConfig.restrictedUsers[interaction.user.id]) return interaction.reply({ content: 'You have been restricted from using these commands', ephemeral: true });
-		if (guildConfig.disabledCommands[interaction.commandName]) return interaction.reply({ content: 'This command is disabled', ephemeral: true });
-		if (guildConfig.restrictedCommands[interaction.commandName] && !interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({ content: 'You require elevated permissions to use this command', ephemeral: true });
+		if (interaction.guild.ownerId !== interaction.user.id) {
+			if (guildConfig.disabledCommands[interaction.commandName]) return interaction.reply({ content: 'This command is disabled', ephemeral: true });
+			if (guildConfig.disabledChannels[interaction.channel.id]) return interaction.reply({ content: 'Commands are disabled for this channel', ephemeral: true });
+			if (guildConfig.disabledUsers[interaction.user.id]) return interaction.reply({ content: 'You have been restricted from using these commands', ephemeral: true });
+			if (!interaction.member.roles.cache.every((value, key) => (guildConfig.disabledRoles == undefined) ? true : !guildConfig.disabledRoles[key])) return interaction.reply({ content: 'This command is not available to your role', ephemeral: true });
+			if (guildConfig.restrictedCommands[interaction.commandName] && !interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) return interaction.reply({ content: 'You require elevated permissions to use this command', ephemeral: true });
+		}
 
 		await interaction.deferReply();
 		const start = (new Date()).getTime();
