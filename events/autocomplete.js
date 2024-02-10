@@ -11,7 +11,7 @@ module.exports = {
 	async execute(interaction) {
 		if (!interaction.isAutocomplete()) return;
 
-		const command = interaction.client.autocomplete.get(interaction.commandName);
+		const command = interaction.client.autoComplete.get(interaction.commandName);
 		if (!command) return;
 
 		try {

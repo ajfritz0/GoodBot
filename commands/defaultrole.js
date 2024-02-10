@@ -17,27 +17,16 @@ module.exports = {
 	 * @returns null
 	 */
 	async execute(interaction) {
-		/*
-		const roleSelectMenu = new RoleSelectMenuBuilder()
-			.setCustomId('defaultRoleSelect')
-			.setPlaceholder('...');
-		const actionRow = new ActionRowBuilder()
-			.addComponents(roleSelectMenu);
-
-		return interaction.reply({
-			content: 'Chose a Role',
-			components: [actionRow],
-		});
-		*/
-
 		const role = interaction.options.getRole('role');
+		const guildConfig = interaction.client.guildConfigs.get(interaction.guild.id);
 		if (role.managed == true || role.name == '@everyone') {
 			return {
 				ephemeral: true,
 				content: `${role.name} is not an assignable role`,
 			};
 		}
-		// store the role information somewhere
+		guildConfig.defaultRole = role.id;
+		guildConfig.save();
 		return {
 			ephemeral: true,
 			content: `New Users will be assigned role: ${role.name}`,

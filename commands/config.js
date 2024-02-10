@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, ChatInputCommandInteraction } = require('discord.js');
+const { SlashCommandBuilder, ChatInputCommandInteraction, PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -115,6 +115,7 @@ module.exports = {
 		// 5 subcommands: enable, disable, restrict, user, and channel
 		const subcommand = interaction.options.getSubcommand();
 		const guildConfig = interaction.client.guildConfigs.get(interaction.guild.id);
+		if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageRoles)) return { content: 'You do not have permission to use this command', ephemeral: true };
 
 		if (subcommand == 'enable') {
 			const name = interaction.options.getString('command');

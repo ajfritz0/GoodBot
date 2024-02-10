@@ -40,6 +40,7 @@ module.exports = {
 				});
 			})
 			.then(msg => {
+				if (!msg) return;
 				interaction.editReply(msg);
 				const delta = (new Date()).getTime() - start;
 				console.log(`Execution finished in ${delta} ms`);
