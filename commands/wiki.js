@@ -1,39 +1,44 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
+
+const randomColor = () => {
+	const hex = '0123456789abcdef';
+	const r = () => hex[Math.floor(Math.random() * 16)];
+	return '#' + (new Array(6)).fill(0).map(r).join('');
+};
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
-		.setDescription('Search Wikipedia')
+		.setDescription('Returns a link to a Wikipedia article')
 		.addStringOption(option =>
 			option.setName('query')
 				.setDescription('Search term')
 				.setRequired(true)),
+	helpMessage: '',
 	async execute(interaction) {
-		await interaction.deferReply();
 		const q = interaction.options.getString('query');
-		const linkData = (await axios(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${q}&limit=1`))['data'];
-		const summaryData = (await axios(`https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts&titles=${q}&exintro&explaintext&exsentences=3`))['data'];
-		const imageData = (await axios(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&titles=${q}`))['data'];
+		const linkPromise = axios(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${q}&limit=1`);
+		const summaryPromise = axios(`https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts&titles=${q}&exintro&explaintext&exsentences=3`);
+		// const imagePromise = axios(`https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=pageimages&titles=${q}`);
 
-		console.log(imageData);
+		const [linkData, summaryData] = await Promise.all([linkPromise, summaryPromise]);
 
 		const info = {
-			title: linkData[1][0],
-			url: linkData[3][0],
+			title: linkData['data'][1][0],
+			url: linkData['data'][3][0],
 			summary: (() => {
-				const pages = summaryData['query']['pages'];
+				const pages = summaryData['data']['query']['pages'];
 				const keys = Object.keys(pages);
 				return pages[keys[0]]['extract'];
 			})(),
 		};
 		const myembed = new EmbedBuilder()
-			.setColor('#0099ff')
+			.setColor(randomColor())
 			.setTitle(info.title)
 			.setURL(info.url)
 			.setDescription(info.summary);
 
-		return await interaction.editReply({ embeds: [myembed] });
+		return { embeds: [myembed] };
 	},
 };

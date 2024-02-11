@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 function randInt(a, b) {
 	const min = Math.min(a, b);
@@ -9,12 +9,13 @@ function randInt(a, b) {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('random')
-		.setDescription('Return a random number between 1 and 100')
-		.addIntegerOption((option) => option.setName('min_value').setDescription('The minimum value of the number'))
-		.addIntegerOption((option) => option.setName('max_value').setDescription('The maximum value of the number')),
+		.setDescription('Return a random number between 2 values')
+		.addIntegerOption((option) => option.setName('min_value').setDescription('Minimum Value (Default: 1)'))
+		.addIntegerOption((option) => option.setName('max_value').setDescription('Maximum Value (Default: 100)')),
+	helpMessage: '',
 	async execute(interaction) {
-		const x = interaction.options.getInteger('min_value') || 0,
-			y = interaction.options.getInteger('max_value') || 10;
-		await interaction.reply(randInt(x, y).toString());
+		const x = interaction.options.getInteger('min_value') || 1,
+			y = interaction.options.getInteger('max_value') || 100;
+		return randInt(x, y).toString();
 	},
 };

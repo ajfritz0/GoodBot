@@ -1,5 +1,6 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const mexp = require('math-expression-evaluator');
+const { SlashCommandBuilder } = require('discord.js');
+const Evaluator = require('math-expression-evaluator');
+const mexp = new Evaluator();
 
 function randNum(max) {
 	return Math.floor(Math.random() * max) + 1;
@@ -17,6 +18,7 @@ module.exports = {
 			return option.setName('hidden')
 				.setDescription('Make the result visible only to the user');
 		}),
+	helpMessage: '',
 	async execute(interaction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
 		const isHidden = interaction.options.getBoolean('hidden');
@@ -46,13 +48,13 @@ module.exports = {
 			}
 			catch (err) {
 				console.log('FOUND AN ERROR', err);
-				return interaction.reply({
+				return {
 					content: err.message,
 					ephemeral: true,
-				});
+				};
 			}
 		}
 
-		interaction.reply({ content: reply.join(' ').trim(), ephemeral: isHidden });
+		return { content: reply.join(' ').trim(), ephemeral: isHidden };
 	},
 };

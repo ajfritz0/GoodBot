@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const phasMetadata = require('../databases/PhasGhostDescriptions.json');
 
 module.exports = {
@@ -7,11 +6,12 @@ module.exports = {
 		.setName('phas')
 		.setDescription('Returns information about ghosts in Phasmophobia')
 		.addStringOption(option => option.setName('ghost').setDescription('Ghost Name').setAutocomplete(true)),
+	helpMessage: '',
 	async execute(interaction) {
 		const ghostName = interaction.options.getString('ghost');
 		const ghostData = phasMetadata[ghostName];
 
-		if (!ghostData) return interaction.reply('Ghost does not exist');
+		if (!ghostData) return 'Ghost does not exist';
 
 		const infoEmbed = new EmbedBuilder()
 			.setColor(ghostData['color'])
@@ -22,7 +22,7 @@ module.exports = {
 				{ name: ghostData['fields'][1]['title'], value: ghostData['fields'][1]['desc'], inline: true },
 			)
 			.setFooter({ text: ghostData['footer'] == '' ? null : ghostData['footer'] });
-		return interaction.reply({ embeds: [infoEmbed] });
+		return { embeds: [infoEmbed] };
 	},
 	async autoComplete(interaction) {
 		const keys = Object.keys(phasMetadata);

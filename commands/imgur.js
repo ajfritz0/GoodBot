@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 const { clientId } = require('../cfg/imgur.json');
 
@@ -14,11 +14,11 @@ module.exports = {
 		.setDescription('Post an image from Imgur')
 		.addStringOption(option =>
 			option.setName('query')
-				.setDescription('Image search query.')
+				.setDescription('Image query')
 				.setRequired(true),
 		),
+	helpMessage: '',
 	async execute(interaction) {
-		await interaction.deferReply();
 		const q = interaction.options.getString('query');
 
 		const data = await axios.get('/3/gallery/search', {
@@ -29,6 +29,6 @@ module.exports = {
 
 		const len = data['data']['data'].length;
 		const link = data['data']['data'][randRange(0, len)]?.link;
-		await interaction.editReply((link === null || link === undefined || link.length == 0) ? 'Nothing found' : link);
+		return (link === null || link === undefined || link.length == 0) ? 'Nothing found' : link;
 	},
 };
