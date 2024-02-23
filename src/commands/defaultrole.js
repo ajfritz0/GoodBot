@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, CommandInteraction, ActionRowBuilder, RoleSelectMenuBuilder } = require('discord.js');
+const { SlashCommandBuilder, ChatInputCommandInteraction } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,7 +13,7 @@ module.exports = {
 	helpMessage: '',
 	/**
 	 *
-	 * @param {CommandInteraction} interaction
+	 * @param {ChatInputCommandInteraction} interaction
 	 * @returns null
 	 */
 	async execute(interaction) {
