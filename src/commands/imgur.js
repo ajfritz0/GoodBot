@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
-const { clientId } = require('../cfg/imgur.json');
+const { clientId } = require('../../cfg/imgur.json');
 
 axios.defaults.baseURL = 'https://api.imgur.com';
 axios.defaults.headers.common['Authorization'] = `Client-ID ${clientId}`;

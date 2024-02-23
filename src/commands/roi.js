@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const rorMetadata = require('../databases/RoR2ItemDescriptions.json');
+const rorMetadata = require('../../databases/RoR2ItemDescriptions.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()

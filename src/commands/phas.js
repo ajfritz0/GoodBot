@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const phasMetadata = require('../databases/PhasGhostDescriptions.json');
+const phasMetadata = require('../../databases/PhasGhostDescriptions.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()

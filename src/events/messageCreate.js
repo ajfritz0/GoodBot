@@ -4,7 +4,7 @@ let bReady = false;
 let phrases;
 
 try {
-	phrases = require('./databases/responses');
+	phrases = require('../../databases/responses');
 	if (phrases.length == 0) throw new Error('NO RESPONSES');
 	bReady = true;
 }

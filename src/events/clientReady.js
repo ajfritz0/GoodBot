@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Events, Client } = require('discord.js');
-const ConfigManager = require('../src/ConfigManager');
+const ConfigManager = require('../ConfigManager');
 
 module.exports = {
 	type: Events.ClientReady,

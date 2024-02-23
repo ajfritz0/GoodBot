@@ -9,12 +9,12 @@ client.autoComplete = new Collection();
 client.helpMessages = new Collection();
 client.guildConfigs = new Collection();
 const arrCommandData = [];
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
 	console.log(`Loading event module: ${file}`);
-	const module = require(`../events/${file}`);
+	const module = require(`./events/${file}`);
 
 	if (module.once) {
 		client.once(module.type, module.execute);
@@ -26,7 +26,7 @@ for (const file of eventFiles) {
 
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
-	const command = require(`../commands/${file}`);
+	const command = require(`./commands/${file}`);
 
 	arrCommandData.push(command.data);
 	client.commands.set(command.data.name, command.execute);
