@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "startdev": "node src/index.js --dev"
+    "dev": "node src/index.js --dev",
+    "fast": "node src/index.js --no-deploy"
   },
   "author": "",
   "license": "ISC",
