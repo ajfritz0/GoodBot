@@ -1,13 +1,14 @@
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const config = require('../cfg/config.json');
 const fs = require('fs');
+const CurrencyExchange = require('./libs/CurrencyExchange.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages] });
-
 client.commands = new Collection();
 client.autoComplete = new Collection();
 client.helpMessages = new Collection();
 client.guildConfigs = new Collection();
+client.exchange = new CurrencyExchange();
 const arrCommandData = [];
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));

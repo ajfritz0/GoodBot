@@ -16,5 +16,7 @@ module.exports = {
 			config.load();
 			client.guildConfigs.set(snowflake, config);
 		}
+
+		client.exchange.load();
 	},
 };
