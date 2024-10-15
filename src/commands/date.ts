@@ -1,14 +1,16 @@
+import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('date')
 		.setDescription('Returns the date and time with an optional timezone')
-		.addStringOption(option =>
+		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('timezone')
 				.setDescription('Reference timezone')),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const today = new Date();
 		const tz = interaction.options.getString('timezone') || 'MST';
 

@@ -1,5 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, ChatInputCommandInteraction } = require('discord.js');
+import type { ChatInputCommandInteraction, SlashCommandSubcommandBuilder } from "discord.js";
+
+const { SlashCommandBuilder } = require('discord.js');
 
 const cylinderRounds = new Map();
 const priorityPlayers = new Map();
@@ -11,7 +12,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roulette')
 		.setDescription('Play a game of Russian Roulette')
-		.addSubcommand(subcommand =>
+		.addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
 			subcommand.setName('load')
 				.setDescription('Load rounds into the cylinder')
 				.addIntegerOption(option =>
@@ -20,15 +21,15 @@ module.exports = {
 						.setRequired(true),
 				),
 		)
-		.addSubcommand(subcommand =>
+		.addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
 			subcommand.setName('spin')
 				.setDescription('Spin the cylinder'),
 		)
-		.addSubcommand(subcommand =>
+		.addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
 			subcommand.setName('empty')
 				.setDescription('Empty the cylinder'),
 		)
-		.addSubcommand(subcommand =>
+		.addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
 			subcommand.setName('fire')
 				.setDescription('Fire the weapon'),
 		),
@@ -38,7 +39,7 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction
 	 * @returns
 	 */
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const subcommand = interaction.options.getSubcommand();
 		const guildId = interaction.guildId, channel = interaction.channel;
 

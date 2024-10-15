@@ -1,5 +1,7 @@
+import type { Guild } from "discord.js";
+
 // eslint-disable-next-line no-unused-vars
-const { Events, Guild } = require('discord.js');
+const { Events } = require('discord.js');
 const ConfigManager = require('../ConfigManager');
 
 module.exports = {
@@ -10,7 +12,7 @@ module.exports = {
 	 * @param {Guild} guild
 	 * @returns
 	 */
-	async execute(guild) {
+	async execute(guild: Guild) {
 		const config = new ConfigManager(guild.id, guild.name);
 		config.load();
 		guild.client.guildConfigs.set(guild.id, config);

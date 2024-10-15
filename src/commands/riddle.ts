@@ -1,5 +1,7 @@
+import type { ChatInputCommandInteraction, MessageComponentInteraction } from "discord.js";
+
 // eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder, ChatInputCommandInteraction } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
@@ -12,7 +14,7 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction
 	 * @returns
 	 */
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const spoilerBtn = new ButtonBuilder()
 			.setCustomId('showspoiler')
 			.setLabel('Answer')
@@ -27,7 +29,7 @@ module.exports = {
 			components: [row],
 		});
 
-		const collectorFilter = i => i.user.id == interaction.user.id;
+		const collectorFilter = (i: MessageComponentInteraction) => i.user.id == interaction.user.id;
 		try {
 			const confirmation = await res.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 			if (confirmation.customId == 'showspoiler') {

@@ -1,13 +1,15 @@
+import type { ChatInputCommandInteraction, SlashCommandIntegerOption, SlashCommandStringOption } from "discord.js";
+
 const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
 
-const getPostUrl = (id) => {
+const getPostUrl = (id: string) => {
 	return `https://news.ycombinator.com/item?id=${id}`;
 };
 
-const getTopPosts = async (numPosts) => {
+const getTopPosts = async (numPosts: number) => {
 	let response = '';
-	let limit = parseInt(numPosts, 10) || 10;
+	let limit = numPosts < 1 ? 1 : 10;
 
 	const { data } = await axios.get('https://hacker-news.firebaseio.com/v0/topstories.json');
 	if (!data) {
@@ -19,7 +21,7 @@ const getTopPosts = async (numPosts) => {
 	}
 
 	const topIds = data.slice(0, limit);
-	topIds.forEach((id) => {
+	topIds.forEach((id: string) => {
 		response += `${getPostUrl(id)}\n`;
 	});
 	return response;
@@ -29,13 +31,13 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('hackernews')
 		.setDescription('Retrieve the top posts from HackerNews')
-		.addStringOption(option =>
+		.addIntegerOption((option: SlashCommandIntegerOption) =>
 			option.setName('numposts')
 				.setDescription('The number of posts to return'),
 		),
 	helpMessage: '',
-	async execute(interaction) {
-		const numPosts = interaction.options.getString('numposts') || 3;
+	async execute(interaction: ChatInputCommandInteraction) {
+		const numPosts = interaction.options.getInteger('numposts') || 3;
 		const response = await getTopPosts(numPosts);
 		return response;
 	},

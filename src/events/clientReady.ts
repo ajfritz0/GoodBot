@@ -1,15 +1,17 @@
-// eslint-disable-next-line no-unused-vars
-const { Events, Client } = require('discord.js');
-const ConfigManager = require('../ConfigManager');
+import type { Client } from "discord.js";
 
-module.exports = {
+// eslint-disable-next-line no-unused-vars
+const { Events } = require('discord.js');
+const { ConfigManager } = require('../ConfigManager');
+
+export default {
 	type: Events.ClientReady,
 	once: true,
 	/**
 	 *
 	 * @param {Client} client
 	 */
-	execute(client) {
+	execute(client: Client) {
 		const guilds = client.guilds.cache;
 		for (const [snowflake, guild] of guilds) {
 			const config = new ConfigManager(snowflake, guild.name);

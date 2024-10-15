@@ -1,3 +1,5 @@
+import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder } = require('discord.js');
 
 const responses = [
@@ -32,13 +34,13 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
 		.setDescription('Query the Magic 8ball')
-		.addStringOption(option =>
+		.addStringOption((option: SlashCommandStringOption) =>
 			option
 				.setName('question')
 				.setDescription('Ask your question'),
 		),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const q = interaction.options.getString('question');
 		const r = responses[Math.floor(Math.random() * responses.length)];
 		if (q == null || q == undefined) return `**${r}**`;

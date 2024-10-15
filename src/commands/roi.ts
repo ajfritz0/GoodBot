@@ -1,3 +1,5 @@
+import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const rorMetadata = require('../../databases/RoR2ItemDescriptions.json');
 
@@ -5,10 +7,10 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roi')
 		.setDescription('Returns information about items in Risk of Rain 2')
-		.addStringOption(option => option.setName('item').setDescription('Item name').setAutocomplete(true)),
+		.addStringOption((option: SlashCommandStringOption) => option.setName('item').setDescription('Item name').setAutocomplete(true).setRequired(true)),
 	helpMessage: '',
-	async execute(interaction) {
-		const itemName = interaction.options.getString('item');
+	async execute(interaction: ChatInputCommandInteraction) {
+		const itemName = interaction.options.getString('item', true);
 		const itemData = rorMetadata[itemName];
 
 		if (!itemData) return 'Item does not exist';
@@ -19,7 +21,7 @@ module.exports = {
 			.setDescription(itemData['desc']);
 		return { embeds: [itemEmbed] };
 	},
-	async autoComplete(interaction) {
+	async autoComplete(interaction: AutocompleteInteraction) {
 		const keys = Object.keys(rorMetadata);
 		const focusedOption = interaction.options.getFocused(true);
 

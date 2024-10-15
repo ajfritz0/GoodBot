@@ -1,15 +1,17 @@
+import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription('Receive help on this bots functionality')
-		.addStringOption(option => {
+		.addStringOption((option: SlashCommandStringOption) => {
 			return option.setName('cmd')
 				.setDescription('Command Name');
 		}),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const cmd = interaction.options.getString('cmd');
 
 		if (cmd == null || cmd == undefined) {

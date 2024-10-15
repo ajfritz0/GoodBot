@@ -1,3 +1,5 @@
+import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 const { clientId } = require('../../cfg/imgur.json');
@@ -5,20 +7,20 @@ const { clientId } = require('../../cfg/imgur.json');
 axios.defaults.baseURL = 'https://api.imgur.com';
 axios.defaults.headers.common['Authorization'] = `Client-ID ${clientId}`;
 
-function randRange(min, max) {
+function randRange(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('imgur')
 		.setDescription('Post an image from Imgur')
-		.addStringOption(option =>
+		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('query')
 				.setDescription('Image query')
 				.setRequired(true),
 		),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const q = interaction.options.getString('query');
 
 		const data = await axios.get('/3/gallery/search', {

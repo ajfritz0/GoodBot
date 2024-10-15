@@ -1,8 +1,10 @@
+import type { ChatInputCommandInteraction, SlashCommandBooleanOption, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder } = require('discord.js');
 const Evaluator = require('math-expression-evaluator');
 const mexp = new Evaluator();
 
-function randNum(max) {
+function randNum(max: number) {
 	return Math.floor(Math.random() * max) + 1;
 }
 const diceRegex = /\d+d\d+/ig;
@@ -10,22 +12,22 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
 		.setDescription('Roll a number of multi-sided dice')
-		.addStringOption((option) =>
+		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('dice')
 				.setDescription('Default: 1d6'),
 		)
-		.addBooleanOption((option) => {
+		.addBooleanOption((option: SlashCommandBooleanOption) => {
 			return option.setName('hidden')
 				.setDescription('Make the result visible only to the user');
 		}),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
 		const isHidden = interaction.options.getBoolean('hidden');
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {
-			const die = expressions[i].match(diceRegex)[0];
+			const die = expressions[i]?.match(diceRegex)?.at(0) || '1d6';
 			if (die == null) continue;
 			try {
 				const _str = die.split('d');

@@ -1,3 +1,5 @@
+import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const phasMetadata = require('../../databases/PhasGhostDescriptions.json');
 
@@ -5,10 +7,10 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('phas')
 		.setDescription('Returns information about ghosts in Phasmophobia')
-		.addStringOption(option => option.setName('ghost').setDescription('Ghost Name').setAutocomplete(true)),
+		.addStringOption((option: SlashCommandStringOption) => option.setName('ghost').setDescription('Ghost Name').setAutocomplete(true).setRequired(true)),
 	helpMessage: '',
-	async execute(interaction) {
-		const ghostName = interaction.options.getString('ghost');
+	async execute(interaction: ChatInputCommandInteraction) {
+		const ghostName = interaction.options.getString('ghost', true);
 		const ghostData = phasMetadata[ghostName];
 
 		if (!ghostData) return 'Ghost does not exist';
@@ -24,7 +26,7 @@ module.exports = {
 			.setFooter({ text: ghostData['footer'] == '' ? null : ghostData['footer'] });
 		return { embeds: [infoEmbed] };
 	},
-	async autoComplete(interaction) {
+	async autoComplete(interaction: AutocompleteInteraction) {
 		const keys = Object.keys(phasMetadata);
 		const focusedOption = interaction.options.getFocused(true);
 
