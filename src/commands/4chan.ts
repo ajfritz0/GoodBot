@@ -1,9 +1,9 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
 const { SlashCommandBuilder } = require('discord.js');
-const axios = require('axios');
+import axios from 'axios';
 
-const getRandomIndex = (struct) => {
+const getRandomIndex = (struct: any[]): any => {
 	if (!struct) {
 		return null;
 	}
@@ -15,23 +15,24 @@ const sanitizeHTML = (str: string) => {
 };
 
 const decodeEntities = (str: string) => {
-	const lookup = {
+	const lookup: { [key: string]: any } = {
 		'lt': '<',
 		'gt': '>',
 		'nbsp': ' ',
 		'amp': '&',
 		'quot': '"',
 	};
+
 	return str
 		.replace(/&(gt|lt|nbsp|amp|quot);/g, (_m, e) => lookup[e])
 		.replace(/&#(\d+);/gi, (_m, num) => String.fromCharCode(parseInt(num)));
 };
 
-const getPostURL = (board, no) => {
+const getPostURL = (board: string, no: number) => {
 	return `https://boards.4chan.org/${board}/thread/${no}`;
 };
 
-const getRandomThread = async (board: string) => {
+const getRandomThread = async (board: string): Promise<{ link: string; text: string; }> => {
 	return new Promise((resolve, reject) => {
 		if (!board || typeof board !== 'string') {
 			reject(new Error('Invalid board'));
@@ -42,7 +43,7 @@ const getRandomThread = async (board: string) => {
 				const { data } = response;
 				const page = getRandomIndex(data);
 				const thread = getRandomIndex(
-					page?.threads?.filter((thr) => thr.com && !thr.sticky),
+					page?.threads?.filter((thr: any) => thr.com && !thr.sticky && (!thr.sub || !thr.sub?.toLowerCase()?.includes('general'))),
 				);
 				if (!thread) {
 					reject(new Error('Could not parse thread info.'));
@@ -70,7 +71,7 @@ module.exports = {
 		),
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {
-		const board = interaction.options.getString('board');
+		const board = interaction.options.getString('board', true);
 		const { link, text } = await getRandomThread(board);
 		return `${text}\n - ${link}`;
 	},

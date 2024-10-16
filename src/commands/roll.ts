@@ -23,17 +23,15 @@ module.exports = {
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
-		const isHidden = interaction.options.getBoolean('hidden');
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {
 			const die = expressions[i]?.match(diceRegex)?.at(0) || '1d6';
-			if (die == null) continue;
 			try {
 				const _str = die.split('d');
-				const quantity = parseInt(_str[0]);
-				const range = parseInt(_str[1]);
-				const strMod = expressions[i].replace(diceRegex, '');
+				const quantity = parseInt(_str[0] || '1');
+				const range = parseInt(_str[1] || '6');
+				const strMod = expressions[i]?.replace(diceRegex, '');
 				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
 				reply.push(`\`\`\`bash\n${expressions[i]}: (`);
 				let sum = 0;
@@ -48,15 +46,12 @@ module.exports = {
 				if (modifier === 0) reply.push(`) = ${sum}\`\`\`\n`);
 				else reply.push(`) + ${modifier} = ${sum + modifier}\`\`\`\n`);
 			}
-			catch (err) {
+			catch (err: any) {
 				console.log('FOUND AN ERROR', err);
-				return {
-					content: err.message,
-					ephemeral: true,
-				};
+				return err.message;
 			}
 		}
 
-		return { content: reply.join(' ').trim(), ephemeral: isHidden };
+		return reply.join(' ').trim();
 	},
 };

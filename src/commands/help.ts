@@ -1,6 +1,27 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
 const { SlashCommandBuilder } = require('discord.js');
+import { readdirSync } from 'node:fs';
+
+interface MessageStruct {
+	[index: string]: {
+		desc: string,
+		info: string,
+	},
+}
+
+const messages: MessageStruct = (() => {
+	const files = readdirSync('./src/commands').filter(f => f.endsWith('.js') || f.endsWith('.ts'));
+	const m: MessageStruct = {};
+	for (const file of files) {
+		const {data, helpMessage} = require(`./${file}`);
+		m[data.name] = {
+			desc: data.description,
+			info: helpMessage,
+		};
+	}
+	return m;
+})();
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -16,15 +37,15 @@ module.exports = {
 
 		if (cmd == null || cmd == undefined) {
 			const helpMessage = [];
-			for (const [key, value] of interaction.client.helpMessages) {
-				helpMessage.push(`"${key}": ${value.summary}\n`);
+			const keys = Object.keys(messages);
+			for (const key of keys) {
+				helpMessage.push(`"${key}": ${messages[key]?.desc}\n`);
 			}
 			return `\`\`\`bash\n${helpMessage.join('')}\`\`\``;
 		}
 		else {
-			const msg = interaction.client.helpMessages.get(cmd);
-			if (msg == null || msg == undefined) return { content: 'That commands does not exist', ephemeral: true };
-			else return `\`\`\`bash\n${msg.message}\`\`\``;
+			const msg = messages[cmd];
+			return (!msg) ? 'That commands does not exist' : `\`\`\`bash\n${msg.info}\`\`\``;
 		}
 	},
 };

@@ -7,6 +7,6 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Pings'),
 	async execute(interaction: ChatInputCommandInteraction) {
-		return interaction.reply('ping');
+		return `${(new Date()).getTime() - interaction.createdAt.getTime()}ms`;
 	}
 };
