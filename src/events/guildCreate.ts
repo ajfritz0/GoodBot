@@ -1,10 +1,10 @@
 import type { Guild } from "discord.js";
 
 // eslint-disable-next-line no-unused-vars
-const { Events } = require('discord.js');
-const ConfigManager = require('../ConfigManager');
+import { Events } from 'discord.js';
+import type { BotEvent } from "../Interfaces";
 
-module.exports = {
+const guildCreate: BotEvent = {
 	type: Events.GuildCreate,
 	once: false,
 	/**
@@ -13,8 +13,7 @@ module.exports = {
 	 * @returns
 	 */
 	async execute(guild: Guild) {
-		const config = new ConfigManager(guild.id, guild.name);
-		config.load();
-		guild.client.guildConfigs.set(guild.id, config);
+		return;
 	},
 };
+export default guildCreate;

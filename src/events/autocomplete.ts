@@ -1,9 +1,10 @@
 import type { AutocompleteInteraction, Collection } from "discord.js";
 
 // eslint-disable-next-line no-unused-vars
-const { Events } = require('discord.js');
+import { Events } from 'discord.js';
+import type { BotEvent } from "../Interfaces";
 
-export default {
+const autocomplete: BotEvent = {
 	type: Events.InteractionCreate,
 	once: false,
 	/**
@@ -24,3 +25,4 @@ export default {
 		}
 	},
 };
+export default autocomplete;

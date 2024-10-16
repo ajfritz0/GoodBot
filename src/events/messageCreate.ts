@@ -1,6 +1,7 @@
 import type { Message, MessageCreateOptions, MessagePayload } from "discord.js";
 
-const { Events } = require('discord.js');
+import { Events } from 'discord.js';
+import type { BotEvent } from "../Interfaces";
 
 type MsgPayload = string | MessageCreateOptions | MessagePayload;
 
@@ -30,10 +31,10 @@ class PhraseGenerator {
 
 const phraseCollection = new PhraseGenerator();
 
-export default {
+const messageCreate: BotEvent = {
 	type: Events.MessageCreate,
 	once: false,
-	execute(message: Message) {
+	async execute(message: Message) {
 		if (message.author.bot || phraseCollection.size == 0) return;
 		const botID = message.client.user.id;
 		const userMentions = message.mentions.users;
@@ -43,3 +44,4 @@ export default {
 		}
 	},
 };
+export default messageCreate;

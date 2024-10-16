@@ -1,7 +1,9 @@
-const { REST, Routes } = require('discord.js');
-const { token, clientId, guildId } = require('../cfg/config.json');
+import type { SlashCommandBuilder } from "discord.js";
 
-module.exports = async (commandData) => {
+import { REST, Routes } from 'discord.js';
+import { token, clientId, guildId } from '../cfg/config.json';
+
+export default async (commandData: SlashCommandBuilder[]) => {
 	const args = process.argv.slice(2);
 	const rest = new REST({ version: '10' }).setToken(token);
 
@@ -9,18 +11,18 @@ module.exports = async (commandData) => {
 
 	try {
 		console.log('Deploying Application Commands');
-		let data = null;
+		let data: Array<any>;
 		if (args.includes('--dev')) {
 			data = await rest.put(
 				Routes.applicationGuildCommands(clientId, guildId),
 				{ body: commandData },
-			);
+			) as Array<any>;
 		}
 		else {
 			data = await rest.put(
 				Routes.applicationCommands(clientId),
 				{ body: commandData },
-			);
+			) as Array<any>;
 		}
 
 		console.log(`Successfully reloaded ${data.length} application commands`);

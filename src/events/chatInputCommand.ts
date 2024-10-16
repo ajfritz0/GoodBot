@@ -1,9 +1,10 @@
 import { type ChatInputCommandInteraction, type Collection } from "discord.js";
 
 // eslint-disable-next-line no-unused-vars
-const { Events } = require('discord.js');
+import { Events } from 'discord.js';
+import type { BotEvent } from "../Interfaces";
 
-export default {
+const chatInputCommand: BotEvent = {
 	type: Events.InteractionCreate,
 	once: false,
 	/**
@@ -20,14 +21,6 @@ export default {
 		await interaction.deferReply();// make defer an option from the command
 		const start = (new Date()).getTime();
 
-		/*
-			EX:
-			=>Command: ping / At: 1970-01-01 00:00
-				=>User: Miles, UserId: 10904370123740198019
-				=>Channel Type: Text Channel
-				=>Channel Name: Gen-Pop / ID: 348241238459683409
-				=>Guild Name: Circus / ID: 8973955682724956857
-		*/
 		const guild = interaction.guild;
 		const channel = interaction.channel;
 		const cmdName = interaction.commandName;
@@ -74,3 +67,4 @@ export default {
 			})
 	},
 };
+export default chatInputCommand
