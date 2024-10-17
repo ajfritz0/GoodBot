@@ -1,8 +1,9 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
-module.exports = {
+const choose: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('choose')
 		.setDescription('Choose from a list of comma seperated items')
@@ -16,3 +17,4 @@ module.exports = {
 		return items[Math.floor(Math.random() * items.length)];
 	},
 };
+module.exports = choose;

@@ -1,9 +1,11 @@
 import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const phasMetadata = require('../../databases/PhasGhostDescriptions.json');
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import path from 'node:path';
+import { BotCommand } from "../Interfaces";
+const phasMetadata = require(path.resolve(process.cwd(),'./databases/PhasGhostDescriptions.json'));
 
-module.exports = {
+const phas: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('phas')
 		.setDescription('Returns information about ghosts in Phasmophobia')
@@ -24,9 +26,9 @@ module.exports = {
 				{ name: ghostData['fields'][1]['title'], value: ghostData['fields'][1]['desc'], inline: true },
 			)
 			.setFooter({ text: ghostData['footer'] == '' ? null : ghostData['footer'] });
-		return { embeds: [infoEmbed] };
+		interaction.editReply({embeds: [infoEmbed]});
 	},
-	async autoComplete(interaction: AutocompleteInteraction) {
+	async autocomplete(interaction: AutocompleteInteraction) {
 		const keys = Object.keys(phasMetadata);
 		const focusedOption = interaction.options.getFocused(true);
 
@@ -37,3 +39,4 @@ module.exports = {
 		);
 	},
 };
+module.exports = phas;

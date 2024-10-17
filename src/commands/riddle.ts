@@ -1,10 +1,11 @@
 import type { ChatInputCommandInteraction, MessageComponentInteraction } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
 // eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
-const axios = require('axios');
+import { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder } from 'discord.js';
+import axios from 'axios';
 
-module.exports = {
+const riddle: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('riddle')
 		.setDescription('Get a riddle'),
@@ -19,7 +20,7 @@ module.exports = {
 			.setCustomId('showspoiler')
 			.setLabel('Answer')
 			.setStyle(ButtonStyle.Primary);
-		const row = new ActionRowBuilder()
+		const row = new ActionRowBuilder<ButtonBuilder>()
 			.addComponents(spoilerBtn);
 		const riddle = await axios.get('https://riddles-api.vercel.app/random');
 		if (riddle.status !== 200) return 'Riddle API is unavailable';
@@ -39,7 +40,6 @@ module.exports = {
 		catch (e) {
 			await interaction.editReply({ content: riddle.data.answer, components: [] });
 		}
-
-		return null;
 	},
 };
+module.exports = riddle;

@@ -2,8 +2,9 @@ import type { SlashCommandBuilder } from "discord.js";
 
 import { REST, Routes } from 'discord.js';
 import { token, clientId, guildId } from '../cfg/config.json';
+import { SlashCommand } from "./Interfaces";
 
-export default async (commandData: SlashCommandBuilder[]) => {
+export default async (commandData: SlashCommand[]) => {
 	const args = process.argv.slice(2);
 	const rest = new REST({ version: '10' }).setToken(token);
 

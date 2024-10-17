@@ -1,18 +1,21 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const axios = require('axios');
+import { BotCommand } from "../Interfaces";
 
-const randomColor = () => {
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import type { ChatInputCommandInteraction, ColorResolvable } from "discord.js";
+import axios from 'axios';
+
+const randomColor = (): ColorResolvable => {
 	const hex = '0123456789abcdef';
 	const r = () => hex[Math.floor(Math.random() * 16)];
-	return '#' + [0, 0, 0, 0, 0, 0].map(r).join('');
+	return `#${[0,0,0,0,0,0].map(r).join('')}`;
 };
 
-module.exports = {
+const meme: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('meme')
 		.setDescription('Show a random meme from reddit'),
 	helpMessage: '',
-	async execute() {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const response = await axios.get('https://meme-api.com/gimme');
 
 		if (response['status'] !== 200) return 'Unable to fetch meme :(';
@@ -24,6 +27,7 @@ module.exports = {
 			.setColor(randomColor())
 			.setFooter({ text: `${data['author']} - /r/${data['subreddit']}` })
 			.setURL(data['postLink']);
-		return { embeds: [embed] };
+		interaction.editReply({embeds: [embed]});
 	},
 };
+module.exports = meme;

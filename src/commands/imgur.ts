@@ -1,8 +1,10 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-const { SlashCommandBuilder } = require('discord.js');
-const axios = require('axios');
-const { clientId } = require('../../cfg/imgur.json');
+import { SlashCommandBuilder } from 'discord.js';
+import axios from 'axios';
+import path from 'node:path';
+import { BotCommand } from "../Interfaces";
+const { clientId } = require(path.resolve(__dirname, '../../cfg/config.json'));
 
 axios.defaults.baseURL = 'https://api.imgur.com';
 axios.defaults.headers.common['Authorization'] = `Client-ID ${clientId}`;
@@ -10,7 +12,7 @@ axios.defaults.headers.common['Authorization'] = `Client-ID ${clientId}`;
 function randRange(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
-module.exports = {
+const imgur: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('imgur')
 		.setDescription('Post an image from Imgur')
@@ -34,3 +36,4 @@ module.exports = {
 		return (link === null || link === undefined || link.length == 0) ? 'Nothing found' : link;
 	},
 };
+module.exports = imgur;

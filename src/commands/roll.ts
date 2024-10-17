@@ -1,14 +1,15 @@
 import type { ChatInputCommandInteraction, SlashCommandBooleanOption, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
-const Evaluator = require('math-expression-evaluator');
+import { SlashCommandBuilder } from 'discord.js';
+import Evaluator from 'math-expression-evaluator';
 const mexp = new Evaluator();
 
 function randNum(max: number) {
 	return Math.floor(Math.random() * max) + 1;
 }
 const diceRegex = /\d+d\d+/ig;
-module.exports = {
+const roll: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
 		.setDescription('Roll a number of multi-sided dice')
@@ -31,8 +32,8 @@ module.exports = {
 				const _str = die.split('d');
 				const quantity = parseInt(_str[0] || '1');
 				const range = parseInt(_str[1] || '6');
-				const strMod = expressions[i]?.replace(diceRegex, '');
-				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
+				const strMod = expressions[i]?.replace(diceRegex, '') || '0'
+				const modifier = mexp.eval(strMod, [], {});
 				reply.push(`\`\`\`bash\n${expressions[i]}: (`);
 				let sum = 0;
 				for (let j = 0; j < quantity; j++) {
@@ -55,3 +56,4 @@ module.exports = {
 		return reply.join(' ').trim();
 	},
 };
+module.exports = roll;

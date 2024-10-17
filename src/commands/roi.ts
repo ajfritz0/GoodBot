@@ -1,9 +1,11 @@
 import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const rorMetadata = require('../../databases/RoR2ItemDescriptions.json');
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import path from 'node:path';
+import { BotCommand } from "../Interfaces";
+const rorMetadata = require(path.resolve(process.cwd(),'./databases/RoR2ItemDescriptions.json'));
 
-module.exports = {
+const roi: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roi')
 		.setDescription('Returns information about items in Risk of Rain 2')
@@ -19,9 +21,9 @@ module.exports = {
 			.setColor(itemData['color'])
 			.setTitle(itemName)
 			.setDescription(itemData['desc']);
-		return { embeds: [itemEmbed] };
+		interaction.editReply({embeds: [itemEmbed]});
 	},
-	async autoComplete(interaction: AutocompleteInteraction) {
+	async autocomplete(interaction: AutocompleteInteraction) {
 		const keys = Object.keys(rorMetadata);
 		const focusedOption = interaction.options.getFocused(true);
 
@@ -32,3 +34,4 @@ module.exports = {
 		);
 	},
 };
+module.exports = roi;

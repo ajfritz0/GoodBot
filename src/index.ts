@@ -1,23 +1,24 @@
-import { Events, AutocompleteInteraction, ChatInputCommandInteraction, Client, Collection, GatewayIntentBits, SlashCommandBuilder } from 'discord.js';
+import { Events, AutocompleteInteraction, ChatInputCommandInteraction, Client, Collection, GatewayIntentBits } from 'discord.js';
 import config from '../cfg/config.json';
-import fs from 'fs';
-import type { BotCommand } from './Interfaces';
+import { readdirSync } from 'fs';
+import type { BotCommand, SlashCommand } from './Interfaces';
+import path from 'path';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages] });
 
-const arrCommandData = [];
+const arrCommandData: SlashCommand[] = [];
 const commands: Collection<string, (interaction: ChatInputCommandInteraction) => Promise<void | string>> = new Collection();
 const autocomplete: Collection<string, (interaction: AutocompleteInteraction) => Promise<void>> = new Collection();
-const commandFiles = fs.readdirSync('./src/commands').filter((file: string) => file.endsWith('.js'));
+const commandFiles = readdirSync(path.resolve(__dirname,'./commands')).filter((file: string) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	console.log(`Loading Module ${file}`);
-	const command: BotCommand = require(`./commands/${file}`);
+	const command: BotCommand = require(path.resolve(__dirname, `./commands/${file}`));
 
 	arrCommandData.push(command.data);
 	commands.set(command.data.name, command.execute);
 
-	if (command.autocomplete) autocomplete.set(command.data.name, command.autocomplete);
+	if (command.autocomplete instanceof Function) autocomplete.set(command.data.name, command.autocomplete);
 }
 
 import chatInputCommandEvent from './events/chatInputCommand';
@@ -37,7 +38,8 @@ client.on(messageCreateEvent.type, messageCreateEvent.execute);
 client.once(readyEvent.type, readyEvent.execute);
 client.on(Events.CacheSweep, () => console.log('ping'));
 
-require('./deploy')(arrCommandData)
+import deploy from './deploy'
+deploy(arrCommandData)
 	.then(() => {
 		client.login(config['token']);
 	})

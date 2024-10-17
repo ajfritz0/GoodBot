@@ -1,7 +1,8 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 import axios from 'axios';
+import { BotCommand } from "../Interfaces";
 
 const getRandomIndex = (struct: any[]): any => {
 	if (!struct) {
@@ -60,7 +61,7 @@ const getRandomThread = async (board: string): Promise<{ link: string; text: str
 			});
 	});
 };
-module.exports = {
+const fourchan: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('4chan')
 		.setDescription('Pull a random link to a  post on a specified 4chan board')
@@ -76,3 +77,4 @@ module.exports = {
 		return `${text}\n - ${link}`;
 	},
 };
+module.exports = fourchan;

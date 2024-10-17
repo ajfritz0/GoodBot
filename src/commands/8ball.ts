@@ -1,6 +1,7 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
 const responses = [
 	'It is certain',
@@ -30,7 +31,7 @@ const responses = [
 	'Follow the seahorse',
 ];
 
-module.exports = {
+const eightball: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
 		.setDescription('Query the Magic 8ball')
@@ -47,3 +48,4 @@ module.exports = {
 		else return `Q: ${q}\n**${r}**`;
 	},
 };
+module.exports = eightball;

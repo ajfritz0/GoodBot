@@ -1,7 +1,9 @@
-import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
+
+export type SlashCommand = SlashCommandBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | SlashCommandSubcommandsOnlyBuilder;
 
 export interface BotCommand {
-	data: SlashCommandBuilder
+	data: SlashCommand
 	helpMessage: string
 
 	isDeferred?: boolean

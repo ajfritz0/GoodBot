@@ -1,6 +1,7 @@
 import type { ChatInputCommandInteraction, SlashCommandIntegerOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
 function randInt(a: number, b: number) {
 	const min = Math.min(a, b);
@@ -8,7 +9,7 @@ function randInt(a: number, b: number) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-module.exports = {
+const random: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('random')
 		.setDescription('Return a random number between 2 values')
@@ -21,3 +22,4 @@ module.exports = {
 		return randInt(x, y).toString();
 	},
 };
+module.exports = random;

@@ -1,8 +1,9 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
-module.exports = {
+const date: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('date')
 		.setDescription('Returns the date and time with an optional timezone')
@@ -15,11 +16,12 @@ module.exports = {
 		const tz = interaction.options.getString('timezone') || 'MST';
 
 		try {
-			const date = today.toLocaleString('en-US', { timeZone: tz });
-			return date;
+			const dateObj = today.toLocaleString('en-US', { timeZone: tz });
+			return dateObj;
 		}
 		catch (e) {
 			return `${tz} is not a valid timezone`;
 		}
 	},
 };
+module.exports = date;

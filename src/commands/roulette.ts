@@ -1,13 +1,14 @@
 import type { ChatInputCommandInteraction, SlashCommandSubcommandBuilder } from "discord.js";
 import RRoulette from "../RRoulette";
+import { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 const game = new RRoulette();
 let timer: string | number | NodeJS.Timeout | undefined = undefined;
 
 const TIMEOUT_DURATION = 60_000;
 
-module.exports = {
+const roulette: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roulette')
 		.setDescription('Play a game of Russian Roulette')
@@ -40,12 +41,12 @@ module.exports = {
 	 */
 	async execute(interaction: ChatInputCommandInteraction) {
 		const subcommand = interaction.options.getSubcommand();
-		const guildId = interaction.guildId, channel = interaction.channel;
+		const channel = interaction.channel;
 		if (!interaction.inGuild()) return 'Cannot be used outside of a guild';
 
 		if (subcommand === 'load') {
 			const rounds = interaction.options.getInteger('rounds', true);
-			if (game.isEmpty()) return 'The cylinder must be empty to load it again';
+			if (!game.isEmpty()) return 'The cylinder must be empty to load it again';
 			if (rounds < 1 || rounds > 6) return 'Number of rounds must be between one and six';
 
 			game.init(interaction.user.id, rounds);
@@ -97,3 +98,4 @@ module.exports = {
 		}
 	},
 };
+module.exports = roulette;

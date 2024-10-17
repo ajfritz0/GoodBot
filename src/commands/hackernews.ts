@@ -1,7 +1,8 @@
 import type { ChatInputCommandInteraction, SlashCommandIntegerOption, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-const axios = require('axios');
-const { SlashCommandBuilder } = require('discord.js');
+import axios from 'axios';
+import { SlashCommandBuilder } from 'discord.js';
 
 const getPostUrl = (id: string) => {
 	return `https://news.ycombinator.com/item?id=${id}`;
@@ -9,7 +10,7 @@ const getPostUrl = (id: string) => {
 
 const getTopPosts = async (numPosts: number) => {
 	let response = '';
-	let limit = numPosts < 1 ? 1 : 10;
+	let limit = (numPosts < 1 || numPosts > 5) ? 3 : numPosts;
 
 	const { data } = await axios.get('https://hacker-news.firebaseio.com/v0/topstories.json');
 	if (!data) {
@@ -27,7 +28,7 @@ const getTopPosts = async (numPosts: number) => {
 	return response;
 };
 
-module.exports = {
+const hackernews: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('hackernews')
 		.setDescription('Retrieve the top posts from HackerNews')
@@ -42,3 +43,4 @@ module.exports = {
 		return response;
 	},
 };
+module.exports = hackernews;

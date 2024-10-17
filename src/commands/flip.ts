@@ -1,6 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { BotCommand } from "../Interfaces";
 
-module.exports = {
+import { SlashCommandBuilder } from 'discord.js';
+
+const flip: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('flip')
 		.setDescription('Flip a coin'),
@@ -10,3 +12,4 @@ module.exports = {
 		return ((coin) ? 'Heads' : 'Tails');
 	},
 };
+module.exports = flip;

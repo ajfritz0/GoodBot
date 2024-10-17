@@ -21,7 +21,7 @@ class PhraseGenerator {
 		catch (e) {
 			this.phrases = [];
 			this.size = 0;
-			throw e;
+			console.error(e);
 		}
 	}
 	getPhrase(): MsgPayload {

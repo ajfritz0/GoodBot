@@ -1,15 +1,16 @@
-import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+import { ChatInputCommandInteraction, ColorResolvable, SlashCommandStringOption } from "discord.js";
+import type { BotCommand } from "../Interfaces";
 
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const axios = require('axios');
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import axios from 'axios';
 
-const randomColor = () => {
+const randomColor = (): ColorResolvable => {
 	const hex = '0123456789abcdef';
 	const r = () => hex[Math.floor(Math.random() * 16)];
-	return '#' + (new Array(6)).fill(0).map(r).join('');
+	return `#${[0,0,0,0,0,0].map(r).join('')}`;
 };
 
-module.exports = {
+const wiki: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
 		.setDescription('Returns a link to a Wikipedia article')
@@ -31,8 +32,7 @@ module.exports = {
 			url: linkData['data'][3][0],
 			summary: (() => {
 				const pages = summaryData['data']['query']['pages'];
-				const keys = Object.keys(pages);
-				return pages[keys[0]]['extract'];
+				for (const page in pages) return pages[page]['extract'];
 			})(),
 		};
 		const myembed = new EmbedBuilder()
@@ -41,6 +41,7 @@ module.exports = {
 			.setURL(info.url)
 			.setDescription(info.summary);
 
-		return { embeds: [myembed] };
+		interaction.editReply({embeds: [myembed]});
 	},
 };
+module.exports = wiki;
