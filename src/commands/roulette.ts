@@ -2,7 +2,7 @@ import type { ChatInputCommandInteraction, SlashCommandSubcommandBuilder } from 
 import RRoulette from "../RRoulette";
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 const game = new RRoulette();
 let timer: string | number | NodeJS.Timeout | undefined = undefined;
 
@@ -12,6 +12,8 @@ const roulette: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roulette')
 		.setDescription('Play a game of Russian Roulette')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
+		.setDMPermission(false)
 		.addSubcommand((subcommand: SlashCommandSubcommandBuilder) =>
 			subcommand.setName('load')
 				.setDescription('Load rounds into the cylinder')

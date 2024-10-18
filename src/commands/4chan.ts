@@ -1,6 +1,6 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import axios from 'axios';
 import { BotCommand } from "../Interfaces";
 
@@ -65,6 +65,8 @@ const fourchan: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('4chan')
 		.setDescription('Pull a random link to a  post on a specified 4chan board')
+		.setNSFW(true)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('board')
 				.setDescription('The board to pull from')
@@ -72,6 +74,7 @@ const fourchan: BotCommand = {
 		),
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {
+		interaction.deferReply();
 		const board = interaction.options.getString('board', true);
 		const { link, text } = await getRandomThread(board);
 		return `${text}\n - ${link}`;

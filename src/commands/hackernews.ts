@@ -2,7 +2,7 @@ import type { ChatInputCommandInteraction, SlashCommandIntegerOption, SlashComma
 import { BotCommand } from "../Interfaces";
 
 import axios from 'axios';
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const getPostUrl = (id: string) => {
 	return `https://news.ycombinator.com/item?id=${id}`;
@@ -32,6 +32,7 @@ const hackernews: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('hackernews')
 		.setDescription('Retrieve the top posts from HackerNews')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addIntegerOption((option: SlashCommandIntegerOption) =>
 			option.setName('numposts')
 				.setDescription('The number of posts to return'),

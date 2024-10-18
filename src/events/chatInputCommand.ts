@@ -18,7 +18,6 @@ const chatInputCommand: BotEvent = {
 		const command = commandData.get(interaction.commandName);
 		if (!command) return;
 
-		await interaction.deferReply();// make defer an option from the command
 		const start = (new Date()).getTime();
 
 		const guild = interaction.guild;
@@ -49,17 +48,19 @@ const chatInputCommand: BotEvent = {
 			`\t=> Channel Type: ${channelType}, Channel Name: ${channelName}, Channel ID: ${channelId}\n`,
 			`\t=> Guild Name: ${guildName}, Guild ID: ${guildId}\n`,
 		);
+		const reply = (msg: string) => {
+			if (interaction.deferred) interaction.editReply(msg);
+			else interaction.reply(msg);
+		};
 		command(interaction)
 			.catch(error => {
 				console.error(error);
 				// this might need to be changed
-				interaction.editReply({
-					content: 'There was an error while executing this command!'
-				});
+				reply('There was an error executing that command!');
 			})
 			.then(msg => {
 				// this might need to be changed
-				if (msg) interaction.editReply(msg);
+				if (msg) reply(msg);
 			})
 			.finally(() => {
 				const delta = (new Date()).getTime() - start;

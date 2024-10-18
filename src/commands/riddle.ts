@@ -2,13 +2,14 @@ import type { ChatInputCommandInteraction, MessageComponentInteraction } from "d
 import { BotCommand } from "../Interfaces";
 
 // eslint-disable-next-line no-unused-vars
-import { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder } from 'discord.js';
+import { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder, PermissionsBitField } from 'discord.js';
 import axios from 'axios';
 
 const riddle: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('riddle')
-		.setDescription('Get a riddle'),
+		.setDescription('Get a riddle')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands),
 	helpMessage: '',
 	/**
 	 *

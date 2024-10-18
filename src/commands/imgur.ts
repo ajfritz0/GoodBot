@@ -1,6 +1,6 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import axios from 'axios';
 import path from 'node:path';
 import { BotCommand } from "../Interfaces";
@@ -16,6 +16,7 @@ const imgur: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('imgur')
 		.setDescription('Post an image from Imgur')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('query')
 				.setDescription('Image query')

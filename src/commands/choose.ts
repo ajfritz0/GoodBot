@@ -1,12 +1,13 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const choose: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('choose')
 		.setDescription('Choose from a list of comma seperated items')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) => option.setName('items')
 			.setDescription('Item List')
 			.setRequired(true)),

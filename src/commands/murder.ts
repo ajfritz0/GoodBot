@@ -1,11 +1,12 @@
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const murder: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('murder')
-		.setDescription('Murders'),
+		.setDescription('Murders')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands),
 	helpMessage: 'murder',
 	async execute() {
 		return '🗡️🔪'.repeat(200);

@@ -1,6 +1,6 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import { BotCommand } from "../Interfaces";
 
 interface MessageStruct {
@@ -14,6 +14,7 @@ const help: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription('Receive help on this bots functionality')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) => {
 			return option.setName('cmd')
 				.setDescription('Command Name');

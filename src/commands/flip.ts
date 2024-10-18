@@ -1,11 +1,12 @@
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const flip: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('flip')
-		.setDescription('Flip a coin'),
+		.setDescription('Flip a coin')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands),
 	helpMessage: '',
 	async execute() {
 		const coin = Math.floor(Math.random() * 2);

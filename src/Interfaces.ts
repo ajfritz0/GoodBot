@@ -6,11 +6,6 @@ export interface BotCommand {
 	data: SlashCommand
 	helpMessage: string
 
-	isDeferred?: boolean
-	isDMAllowed?: boolean
-	isNSFW?: boolean
-	defaultMemberPermission?: string | number | bigint
-
 	execute: (interaction: ChatInputCommandInteraction) => Promise<string|void>
 	autocomplete?: (interaction:AutocompleteInteraction) => Promise<void>
 }

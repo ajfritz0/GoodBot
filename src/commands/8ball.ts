@@ -1,7 +1,7 @@
 import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const responses = [
 	'It is certain',
@@ -35,6 +35,7 @@ const eightball: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
 		.setDescription('Query the Magic 8ball')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) =>
 			option
 				.setName('question')

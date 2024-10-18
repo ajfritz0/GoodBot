@@ -1,6 +1,6 @@
 import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } from 'discord.js';
 import path from 'node:path';
 import { BotCommand } from "../Interfaces";
 const rorMetadata = require(path.resolve(process.cwd(),'./databases/RoR2ItemDescriptions.json'));
@@ -9,6 +9,7 @@ const roi: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roi')
 		.setDescription('Returns information about items in Risk of Rain 2')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) => option.setName('item').setDescription('Item name').setAutocomplete(true).setRequired(true)),
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {

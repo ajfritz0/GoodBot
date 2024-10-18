@@ -1,4 +1,4 @@
-import { Events, AutocompleteInteraction, ChatInputCommandInteraction, Client, Collection, GatewayIntentBits } from 'discord.js';
+import { AutocompleteInteraction, ChatInputCommandInteraction, Client, Collection, GatewayIntentBits } from 'discord.js';
 import config from '../cfg/config.json';
 import { readdirSync } from 'fs';
 import type { BotCommand, SlashCommand } from './Interfaces';
@@ -36,7 +36,6 @@ client.on(autocompleteCommandEvent.type, (interaction: AutocompleteInteraction) 
 client.on(guildMemberAddEvent.type, guildMemberAddEvent.execute);
 client.on(messageCreateEvent.type, messageCreateEvent.execute);
 client.once(readyEvent.type, readyEvent.execute);
-client.on(Events.CacheSweep, () => console.log('ping'));
 
 import deploy from './deploy'
 deploy(arrCommandData)

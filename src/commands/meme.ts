@@ -1,6 +1,6 @@
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } from 'discord.js';
 import type { ChatInputCommandInteraction, ColorResolvable } from "discord.js";
 import axios from 'axios';
 
@@ -13,7 +13,8 @@ const randomColor = (): ColorResolvable => {
 const meme: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('meme')
-		.setDescription('Show a random meme from reddit'),
+		.setDescription('Show a random meme from reddit')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands),
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {
 		const response = await axios.get('https://meme-api.com/gimme');

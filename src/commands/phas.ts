@@ -1,6 +1,6 @@
 import type { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
 
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } from 'discord.js';
 import path from 'node:path';
 import { BotCommand } from "../Interfaces";
 const phasMetadata = require(path.resolve(process.cwd(),'./databases/PhasGhostDescriptions.json'));
@@ -9,6 +9,7 @@ const phas: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('phas')
 		.setDescription('Returns information about ghosts in Phasmophobia')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) => option.setName('ghost').setDescription('Ghost Name').setAutocomplete(true).setRequired(true)),
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {

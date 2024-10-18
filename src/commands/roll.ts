@@ -1,7 +1,7 @@
 import type { ChatInputCommandInteraction, SlashCommandBooleanOption, SlashCommandStringOption } from "discord.js";
 import { BotCommand } from "../Interfaces";
 
-import { SlashCommandBuilder } from 'discord.js';
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import Evaluator from 'math-expression-evaluator';
 const mexp = new Evaluator();
 
@@ -13,6 +13,7 @@ const roll: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
 		.setDescription('Roll a number of multi-sided dice')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('dice')
 				.setDescription('Default: 1d6'),
@@ -24,6 +25,8 @@ const roll: BotCommand = {
 	helpMessage: '',
 	async execute(interaction: ChatInputCommandInteraction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
+		const hidden = interaction.options.getBoolean('hidden');
+		interaction.deferReply({ephemeral: !!hidden});
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {

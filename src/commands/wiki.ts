@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, ColorResolvable, SlashCommandStringOption } from "discord.js";
+import { ChatInputCommandInteraction, ColorResolvable, PermissionsBitField, SlashCommandStringOption } from "discord.js";
 import type { BotCommand } from "../Interfaces";
 
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
@@ -14,6 +14,7 @@ const wiki: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
 		.setDescription('Returns a link to a Wikipedia article')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
 		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('query')
 				.setDescription('Search term')
