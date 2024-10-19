@@ -1,23 +1,27 @@
-// eslint-disable-next-line no-unused-vars
-const { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder, ChatInputCommandInteraction } = require('discord.js');
-const axios = require('axios');
+import type { ChatInputCommandInteraction, MessageComponentInteraction } from "discord.js";
+import { BotCommand } from "../Interfaces";
 
-module.exports = {
+// eslint-disable-next-line no-unused-vars
+import { SlashCommandBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder, PermissionsBitField } from 'discord.js';
+import axios from 'axios';
+
+const riddle: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('riddle')
-		.setDescription('Get a riddle'),
+		.setDescription('Get a riddle')
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands),
 	helpMessage: '',
 	/**
 	 *
 	 * @param {ChatInputCommandInteraction} interaction
 	 * @returns
 	 */
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const spoilerBtn = new ButtonBuilder()
 			.setCustomId('showspoiler')
 			.setLabel('Answer')
 			.setStyle(ButtonStyle.Primary);
-		const row = new ActionRowBuilder()
+		const row = new ActionRowBuilder<ButtonBuilder>()
 			.addComponents(spoilerBtn);
 		const riddle = await axios.get('https://riddles-api.vercel.app/random');
 		if (riddle.status !== 200) return 'Riddle API is unavailable';
@@ -27,7 +31,7 @@ module.exports = {
 			components: [row],
 		});
 
-		const collectorFilter = i => i.user.id == interaction.user.id;
+		const collectorFilter = (i: MessageComponentInteraction) => i.user.id == interaction.user.id;
 		try {
 			const confirmation = await res.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 			if (confirmation.customId == 'showspoiler') {
@@ -37,7 +41,6 @@ module.exports = {
 		catch (e) {
 			await interaction.editReply({ content: riddle.data.answer, components: [] });
 		}
-
-		return null;
 	},
 };
+module.exports = riddle;

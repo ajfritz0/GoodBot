@@ -1,38 +1,42 @@
-const { SlashCommandBuilder } = require('discord.js');
-const Evaluator = require('math-expression-evaluator');
+import type { ChatInputCommandInteraction, SlashCommandBooleanOption, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
+
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
+import Evaluator from 'math-expression-evaluator';
 const mexp = new Evaluator();
 
-function randNum(max) {
+function randNum(max: number) {
 	return Math.floor(Math.random() * max) + 1;
 }
 const diceRegex = /\d+d\d+/ig;
-module.exports = {
+const roll: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
 		.setDescription('Roll a number of multi-sided dice')
-		.addStringOption((option) =>
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
+		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('dice')
 				.setDescription('Default: 1d6'),
 		)
-		.addBooleanOption((option) => {
+		.addBooleanOption((option: SlashCommandBooleanOption) => {
 			return option.setName('hidden')
 				.setDescription('Make the result visible only to the user');
 		}),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const diceStr = interaction.options.getString('dice') || '1d6';
-		const isHidden = interaction.options.getBoolean('hidden');
+		const hidden = interaction.options.getBoolean('hidden');
+		interaction.deferReply({ephemeral: !!hidden});
 		const expressions = diceStr.split(' ');
 		const reply = [];
 		for (let i = 0; i < expressions.length; i++) {
-			const die = expressions[i].match(diceRegex)[0];
-			if (die == null) continue;
+			const die = expressions[i]?.match(diceRegex)?.at(0) || '1d6';
 			try {
 				const _str = die.split('d');
-				const quantity = parseInt(_str[0]);
-				const range = parseInt(_str[1]);
-				const strMod = expressions[i].replace(diceRegex, '');
-				const modifier = mexp.eval(strMod == '' ? '0' : strMod);
+				const quantity = parseInt(_str[0] || '1');
+				const range = parseInt(_str[1] || '6');
+				const strMod = expressions[i]?.replace(diceRegex, '') || '0'
+				const modifier = mexp.eval(strMod, [], {});
 				reply.push(`\`\`\`bash\n${expressions[i]}: (`);
 				let sum = 0;
 				for (let j = 0; j < quantity; j++) {
@@ -46,15 +50,13 @@ module.exports = {
 				if (modifier === 0) reply.push(`) = ${sum}\`\`\`\n`);
 				else reply.push(`) + ${modifier} = ${sum + modifier}\`\`\`\n`);
 			}
-			catch (err) {
+			catch (err: any) {
 				console.log('FOUND AN ERROR', err);
-				return {
-					content: err.message,
-					ephemeral: true,
-				};
+				return err.message;
 			}
 		}
 
-		return { content: reply.join(' ').trim(), ephemeral: isHidden };
+		return reply.join(' ').trim();
 	},
 };
+module.exports = roll;

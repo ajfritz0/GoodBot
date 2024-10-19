@@ -1,4 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
+import type { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
+import { BotCommand } from "../Interfaces";
+
+import { PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 
 const responses = [
 	'It is certain',
@@ -28,20 +31,22 @@ const responses = [
 	'Follow the seahorse',
 ];
 
-module.exports = {
+const eightball: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
 		.setDescription('Query the Magic 8ball')
-		.addStringOption(option =>
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
+		.addStringOption((option: SlashCommandStringOption) =>
 			option
 				.setName('question')
 				.setDescription('Ask your question'),
 		),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const q = interaction.options.getString('question');
 		const r = responses[Math.floor(Math.random() * responses.length)];
 		if (q == null || q == undefined) return `**${r}**`;
 		else return `Q: ${q}\n**${r}**`;
 	},
 };
+module.exports = eightball;

@@ -1,22 +1,26 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const axios = require('axios');
+import { ChatInputCommandInteraction, ColorResolvable, PermissionsBitField, SlashCommandStringOption } from "discord.js";
+import type { BotCommand } from "../Interfaces";
 
-const randomColor = () => {
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import axios from 'axios';
+
+const randomColor = (): ColorResolvable => {
 	const hex = '0123456789abcdef';
 	const r = () => hex[Math.floor(Math.random() * 16)];
-	return '#' + (new Array(6)).fill(0).map(r).join('');
+	return `#${[0,0,0,0,0,0].map(r).join('')}`;
 };
 
-module.exports = {
+const wiki: BotCommand = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
 		.setDescription('Returns a link to a Wikipedia article')
-		.addStringOption(option =>
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.UseApplicationCommands)
+		.addStringOption((option: SlashCommandStringOption) =>
 			option.setName('query')
 				.setDescription('Search term')
 				.setRequired(true)),
 	helpMessage: '',
-	async execute(interaction) {
+	async execute(interaction: ChatInputCommandInteraction) {
 		const q = interaction.options.getString('query');
 		const linkPromise = axios(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${q}&limit=1`);
 		const summaryPromise = axios(`https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts&titles=${q}&exintro&explaintext&exsentences=3`);
@@ -29,8 +33,7 @@ module.exports = {
 			url: linkData['data'][3][0],
 			summary: (() => {
 				const pages = summaryData['data']['query']['pages'];
-				const keys = Object.keys(pages);
-				return pages[keys[0]]['extract'];
+				for (const page in pages) return pages[page]['extract'];
 			})(),
 		};
 		const myembed = new EmbedBuilder()
@@ -39,6 +42,7 @@ module.exports = {
 			.setURL(info.url)
 			.setDescription(info.summary);
 
-		return { embeds: [myembed] };
+		interaction.editReply({embeds: [myembed]});
 	},
 };
+module.exports = wiki;
